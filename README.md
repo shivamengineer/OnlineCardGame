@@ -1,2 +1,2 @@
 # OnlineCardGame
-multiplayer online cardgame
+multiplayer online card game
