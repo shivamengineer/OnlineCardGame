@@ -7,6 +7,7 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 const players = {};
+const card = new Card(4, 1, true, 1);
 
 socket.on('updatePlayers', (backendPlayers) => {
   for(const id in backendPlayers){
@@ -35,5 +36,9 @@ function draw() {
     const newPlayer = players[id];
     newPlayer.render();
   }
+
+  console.log(card.value);
+  console.log(card.visibility);
+  card.changeVisibility();
 
 }
