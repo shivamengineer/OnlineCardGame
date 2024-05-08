@@ -12,7 +12,7 @@ socket.on('updatePlayers', (backendPlayers) => {
   for(const id in backendPlayers){
     const backendPlayer = backendPlayers[id];
     if(!players[id]){
-      players[id] = new Player(backendPlayer.x + (50 * backendPlayer.index), backendPlayer.y, 30, 30, "white");
+      players[id] = new Rect(backendPlayer.x + (50 * backendPlayer.index), backendPlayer.y, 30, 30, "white");
     }
   }
   

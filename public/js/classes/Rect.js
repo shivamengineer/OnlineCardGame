@@ -1,4 +1,4 @@
-class Player {
+class Rect {
   constructor(x, y, width, height, color) {
     this.x = x;
     this.y = y;
