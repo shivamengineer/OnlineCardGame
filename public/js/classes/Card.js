@@ -1,9 +1,9 @@
 class Card {
-    constructor(value, suit, visibile, deckID){
-        this.value = value;
-        this.suit = suit;
-        this.visible = visible;
-        this.deckID = deckID;
+    constructor(cardValue, cardSuit, visibility, ID){
+        this.value = cardValue;
+        this.suit = cardSuit;
+        this.visible = visibility;
+        this.deckID = ID;
     }
 
     changeVisibility(){

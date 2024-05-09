@@ -38,7 +38,7 @@ function draw() {
   }
 
   console.log(card.value);
-  console.log(card.visibility);
+  console.log(card.visible);
   card.changeVisibility();
 
 }
