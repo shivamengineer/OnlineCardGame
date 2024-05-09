@@ -1,5 +1,7 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
+const img = document.getElementById("AceOfSpades");
+var ctx2 = canvas.getContext('2d');
 
 const socket = io();
 
@@ -31,6 +33,14 @@ socket.on('updatePlayers', (backendPlayers) => {
 function draw() {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx2.save();
+  ctx2.drawImage(img, 400, 40);
+  ctx2.translate(0, 0);
+  for(i = 0; i < 90; i++){
+    ctx2.rotate(Math.PI / 180);
+    ctx2.drawImage(img, 400, 40);
+  }
+  ctx2.restore();
 
   for(const id in players){
     const newPlayer = players[id];
