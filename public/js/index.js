@@ -35,7 +35,6 @@ function draw() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx2.save();
   ctx2.drawImage(img, 400, 40);
-  ctx2.translate(0, 0);
   for(i = 0; i < 90; i++){
     ctx2.rotate(Math.PI / 180);
     ctx2.drawImage(img, 400, 40);
