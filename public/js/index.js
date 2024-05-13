@@ -57,8 +57,8 @@ function draw() {
   ctx2.drawImage(img, x3, y3);
 
   //bottom left rotated
-  ctx2.rotate(-90 * degree);
-  ctx2.drawImage(img, -x - img.naturalWidth, 0);
+  ctx2.rotate(90 * degree);
+  ctx2.drawImage(img, x, -img.naturalWidth);
   //ctx2.drawImage(img, y2, x2);
   ctx2.restore();
 
