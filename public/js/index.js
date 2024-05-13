@@ -59,14 +59,15 @@ function draw() {
   //bottom left rotated
   ctx2.rotate(90 * degree);
   ctx2.drawImage(img, x, -img.naturalWidth);
-  //ctx2.drawImage(img, y2, x2);
+  ctx2.drawImage(img, x2, -y2 - img.naturalWidth);
   ctx2.restore();
 
   //top right rotated
   ctx2.save();
   ctx2.rotate(90 * degree);
   ctx2.drawImage(img, 0, -x - img.naturalWidth);
-  //ctx2.drawImage(img, x2, y2);
+  ctx2.drawImage(img, y2, -x2 - img.naturalWidth);
+  //ctx2.drawImage(img, Math.sqrt((x2 * x2)+(y2 * y2)) - img.naturalWidth, 0);
   ctx2.restore();
 
   //middle rotated
