@@ -11,6 +11,12 @@ canvas.height = innerHeight;
 const players = {};
 const card = new Card(4, 1, true, 1);
 const degree = Math.PI / 180;
+const x = 0;
+const x2 = 100;
+const x3 = 300;
+const y = 400;
+const y2 = 500;
+const y3 = 300;
 
 socket.on('updatePlayers', (backendPlayers) => {
   for(const id in backendPlayers){
@@ -34,20 +40,37 @@ socket.on('updatePlayers', (backendPlayers) => {
 function draw() {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  
-  ctx2.save();
-  ctx2.drawImage(img, 400, 0);
-  ctx2.rotate(45 * degree);
-  ctx2.translate(400, 0);
-  ctx2.translate(-100, -2 * 400 * Math.sin(45 * degree / 2));
-  ctx2.drawImage(img, 0, 0);
-  ctx2.restore();
 
   ctx2.save();
-  ctx2.rotate(90 * degree);
-  ctx2.translate(0, 0);
-  ctx2.translate(0, -2 * 300 * Math.sin(90 * degree / 2));
-  ctx2.drawImage(img, 0, 0);
+  //bottom left
+  ctx2.drawImage(img, x, y);
+  ctx2.drawImage(img, x2, y2);
+
+  //top right
+  ctx2.drawImage(img, y, x);
+  ctx2.drawImage(img, y2, x2);
+  
+  //middle
+  ctx2.drawImage(img, x3, y3);
+
+  //top right rotated
+  ctx2.rotate(70 * degree);
+  ctx2.drawImage(img, y, x);
+  ctx2.drawImage(img, y2, x2);
+  ctx2.restore();
+
+  //bottom left rotated
+  ctx2.save();
+  ctx2.rotate(-70 * degree);
+  //ctx2.translate(0, -2 * x * Math.sin(45 * degree / 2));
+  ctx2.drawImage(img, x, y);
+  ctx2.drawImage(img, x2, y2);
+  ctx2.restore();
+
+  //middle rotated
+  ctx2.save();
+  ctx2.rotate(45 * degree);
+  ctx2.drawImage(img, x3, y3);
   ctx2.restore();
 
   for(const id in players){
