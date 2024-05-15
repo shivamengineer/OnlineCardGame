@@ -11,12 +11,6 @@ canvas.height = innerHeight;
 const players = {};
 const card = new Card(4, 1, true, 1);
 const degree = Math.PI / 180;
-/*const x = 400;
-const x2 = 500;
-const x3 = 300;
-const y = 0;
-const y2 = 100;
-const y3 = 300;*/
 
 const testX = 300;
 const testY = 200;
@@ -45,8 +39,6 @@ function draw() {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  //console.log("width: " + img.naturalWidth);
-  //console.log("height: " + img.naturalHeight);
 
   ctx2.save();
   //ctx2.drawImage(img, testX, testY);
@@ -69,44 +61,9 @@ function draw() {
   ctx2.drawImage(img, newX, newY);
   ctx2.restore();
 
-  /*ctx2.save();
-  //bottom left
-  ctx2.drawImage(img, x, y);
-  ctx2.drawImage(img, x2, y2);
-
-  //top right
-  ctx2.drawImage(img, y, x);
-  ctx2.drawImage(img, y2, x2);
-  
-  //middle
-  ctx2.drawImage(img, x3, y3);
-
-  //bottom left rotated
-  ctx2.rotate(90 * degree);
-  ctx2.drawImage(img, x, -y - img.naturalWidth);
-  ctx2.drawImage(img, x2, -y2 - img.naturalWidth);
-  ctx2.restore();
-
-  //top right rotated
-  ctx2.save();
-  ctx2.rotate(90 * degree);
-  ctx2.drawImage(img, y, -x - img.naturalWidth);
-  ctx2.drawImage(img, y2, -x2 - img.naturalWidth);
-  ctx2.restore();
-
-  //middle rotated
-  ctx2.save();
-  ctx2.rotate(90 * degree);
-  ctx2.drawImage(img, x3 , y3 - (2 * x3) - (img.naturalWidth));
-  ctx2.restore();*/
-
   for(const id in players){
     const newPlayer = players[id];
     newPlayer.render();
   }
-
-  console.log(card.value);
-  console.log(card.visible);
-  card.changeVisibility();
 
 }
