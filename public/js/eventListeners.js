@@ -1,6 +1,9 @@
 addEventListener('mousedown', (event) => {
     if(!players[socket.id]) return;
 
-    console.log("x: " + event.clientX);
-    console.log("y: " + event.clientY);
+    var mouseX = event.clientX;
+    var mouseY = event.clientY;
+    var collides = mouseCollides(mouseX, mouseY, players[socket.id]);
+    console.log(collides);
+
 });
