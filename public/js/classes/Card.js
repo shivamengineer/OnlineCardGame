@@ -1,12 +1,40 @@
-class Card {
-    constructor(cardValue, cardSuit, visibility, ID, xPos, yPos, rotated){
+class Card extends Rect {
+    constructor(cardValue, cardSuit, visibility, ID, x, y){
+        super();
         this.value = cardValue;
         this.suit = cardSuit;
         this.visible = visibility;
         this.deckID = ID;
-        this.x = xPos;
-        this.y = yPos;
-        this.rotation = rotated;
+        this.moving = false;
+        this.x = x;
+        this.y = y;
+    }
+
+    renderCard(image){
+        ctx2.save();
+        ctx2.rotate(this.rotation * degree * 90);
+        var rotateAmount = this.rotation % 4;
+        var pos = {};
+        switch(rotateAmount){
+            case 0:
+                pos[0] = this.x;
+                pos[1] = this.y;
+                break;
+            case 1:
+                pos[0] = this.y;
+                pos[1] = -this.x - image.naturalWidth;
+                break;
+            case 2:
+                pos[0] = -this.x - image.naturalWidth;
+                pos[1] = -this.y - image.naturalHeight;
+                break;
+            case 3:
+                pos[0] = -this.y - image.naturalHeight;
+                pos[1] = this.x
+                break;
+        }
+        ctx2.drawImage(image, pos[0], pos[1]);
+        ctx2.restore();
     }
 
     changeVisibility(){
