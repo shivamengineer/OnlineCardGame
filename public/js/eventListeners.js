@@ -7,3 +7,14 @@ addEventListener('mousedown', (event) => {
     console.log(collides);
 
 });
+
+addEventListener('mousemove', (event) => {
+    if(!players[socket.id]) return;
+
+});
+
+addEventListener('mouseup', (event) => {
+    if(!players[socket.id]) return;
+
+
+});

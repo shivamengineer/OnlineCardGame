@@ -9,12 +9,14 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 const players = {};
-const card = new Card(4, 1, true, 1);
-const degree = Math.PI / 180;
+const cards = {};
 
-const testX = 300;
-const testY = 200;
-const rotateAmount = 3;
+for(i = 0; i < 5; i++){
+  cards[i] = new Card(4, 2, false, i, 20 + (70 * i), 150);
+  cards[i].rotation = i;
+}
+
+const degree = Math.PI / 180;
 
 socket.on('updatePlayers', (backendPlayers) => {
   for(const id in backendPlayers){
@@ -39,27 +41,9 @@ function draw() {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-
-  ctx2.save();
-  //ctx2.drawImage(img, testX, testY);
-  ctx2.rotate(90 * rotateAmount * degree);
-  var newX = 0;
-  var newY = 0;
-  if(rotateAmount % 4 == 0){
-    newX = testX;
-    newY = testY;
-  } else if(rotateAmount % 4 == 1){
-    newX = testY;
-    newY = -testX - img.naturalWidth;
-  } else if(rotateAmount % 4 == 2){
-    newX = -testX - img.naturalWidth;
-    newY = -testY - img.naturalHeight;
-  } else {
-    newX = -testY - img.naturalHeight;
-    newY = testX;
+  for(i = 0; i < 5; i++){
+    cards[i].renderCard(img);
   }
-  ctx2.drawImage(img, newX, newY);
-  ctx2.restore();
 
   for(const id in players){
     const newPlayer = players[id];

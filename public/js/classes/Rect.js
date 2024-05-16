@@ -4,6 +4,7 @@ class Rect {
     this.y = y;
     this.width = width;
     this.height = height;
+    this.rotation = 0;
     this.color = color;
   }
 
