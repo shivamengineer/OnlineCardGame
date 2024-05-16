@@ -6,3 +6,12 @@ function mouseCollides(mouseX, mouseY, obj){
     }
     return collides;
 }
+
+function mouseCollidesCard(mouseX, mouseY, card, img){
+    var collides = false;
+    if(mouseX > card.x && mouseX < card.x + img.naturalWidth &&
+        mouseY > card.y && mouseY < card.y + img.naturalHeight){
+            collides = true;
+        }
+    return collides;
+}

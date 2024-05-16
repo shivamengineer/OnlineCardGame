@@ -13,7 +13,6 @@ const cards = {};
 
 for(i = 0; i < 5; i++){
   cards[i] = new Card(4, 2, false, i, 20 + (70 * i), 150);
-  cards[i].rotation = i;
 }
 
 const degree = Math.PI / 180;

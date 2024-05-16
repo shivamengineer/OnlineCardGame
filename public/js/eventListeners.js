@@ -3,13 +3,18 @@ addEventListener('mousedown', (event) => {
 
     var mouseX = event.clientX;
     var mouseY = event.clientY;
-    var collides = mouseCollides(mouseX, mouseY, players[socket.id]);
-    console.log(collides);
+    var card = -1;
+    for(const i in cards){
+        if(mouseCollidesCard(mouseX, mouseY, cards[i], img)){
+            cards[i].rotation++;
+        }
+    }
 
+    draw();
 });
 
 addEventListener('mousemove', (event) => {
-    if(!players[socket.id]) return;
+    if(!players[socket.id] ) return;
 
 });
 
