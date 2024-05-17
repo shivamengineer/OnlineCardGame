@@ -10,9 +10,18 @@ canvas.height = innerHeight;
 
 const players = {};
 const cards = {};
+const menuOptions = {};
+var menuAttribs = [0, 0, 30, 20, "white"];
+var cardMenuOpen = false;
+var cardSelected = -1;
+var shift = false;
 
 for(i = 0; i < 5; i++){
   cards[i] = new Card(4, 2, false, i, 20 + (70 * i), 150);
+}
+
+for(i = 0; i < 2; i++){
+  menuOptions[i] = new Rect(0, 0, menuAttribs[2], menuAttribs[3], menuAttribs[4]);
 }
 
 const degree = Math.PI / 180;
@@ -47,6 +56,12 @@ function draw() {
   for(const id in players){
     const newPlayer = players[id];
     newPlayer.render();
+  }
+
+  if(cardMenuOpen){
+    for(const i in menuOptions){
+      menuOptions[i].render();
+    }
   }
 
 }
