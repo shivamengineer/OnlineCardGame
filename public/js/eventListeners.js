@@ -4,12 +4,35 @@ addEventListener('mousedown', (event) => {
     var mouseX = event.clientX;
     var mouseY = event.clientY;
     var card = -1;
-    for(const i in cards){
-        if(mouseCollidesCard(mouseX, mouseY, cards[i], img)){
-            //cards[i].rotation++;
-            cards[i].moving = true;
-            cards[i].differenceX = mouseX - cards[i].x;
-            cards[i].differenceY = mouseY - cards[i].y;
+
+    if(cardMenuOpen){
+        for(const i in menuOptions){
+            if(mouseCollides(mouseX, mouseY, menuOptions[i])){
+                console.log("selected option" + i);
+                if(i == 0){
+                    cards[cardSelected].rotation++
+                } else if(i == 1){
+                    cards[cardSelected].rotation--;
+                }
+            }
+        }
+        cardMenuOpen = false;
+    } else {
+        for(const i in cards){
+            if(mouseCollidesCard(mouseX, mouseY, cards[i], img)){
+                if(shift){
+                    cardMenuOpen = true;
+                    cardSelected = i;
+                    for(j = 0; j < 2; j++){
+                        menuOptions[j].x = mouseX;
+                        menuOptions[j].y = mouseY + (j * 22);
+                    }
+                } else {
+                    cards[i].moving = true;
+                    cards[i].differenceX = mouseX - cards[i].x;
+                    cards[i].differenceY = mouseY - cards[i].y;
+                }
+            }
         }
     }
 
@@ -46,4 +69,23 @@ addEventListener('mouseup', (event) => {
 
     draw();
 
+});
+
+addEventListener('keydown', (event) => {
+    switch(event.keyCode){
+        case 65:
+            console.log("A");
+            break;
+        case 16:
+            shift = true;
+            break;
+    }
+});
+
+addEventListener('keyup', (event) => {
+    switch(event.keyCode){
+        case 16:
+            shift = false;
+            break;
+    }
 });
