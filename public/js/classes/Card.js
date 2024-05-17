@@ -8,6 +8,8 @@ class Card extends Rect {
         this.moving = false;
         this.x = x;
         this.y = y;
+        this.differenceX = 0;
+        this.differenceY = 0;
     }
 
     renderCard(image){
