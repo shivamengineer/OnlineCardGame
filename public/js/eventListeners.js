@@ -73,9 +73,6 @@ addEventListener('mouseup', (event) => {
 
 addEventListener('keydown', (event) => {
     switch(event.keyCode){
-        case 65:
-            console.log("A");
-            break;
         case 16:
             shift = true;
             break;
