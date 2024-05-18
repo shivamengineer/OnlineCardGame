@@ -12,4 +12,9 @@ class Rect {
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.width, this.height);
   }
+
+  renderText(message){
+    ctx.font = "16px serif";
+    ctx.strokeText(message, this.x + 2, this.y + 17);
+  }
 }
