@@ -11,7 +11,8 @@ canvas.height = innerHeight;
 const players = {};
 const cards = {};
 const menuOptions = {};
-var menuAttribs = [0, 0, 30, 20, "white"];
+var menuAttribs = [0, 0, 75, 20, "white"];
+var menuTitles = ["rotate right", "rotate left"];
 var cardMenuOpen = false;
 var cardSelected = -1;
 var shift = false;
@@ -61,6 +62,7 @@ function draw() {
   if(cardMenuOpen){
     for(const i in menuOptions){
       menuOptions[i].render();
+      menuOptions[i].renderText(menuTitles[i]);
     }
   }
 
