@@ -1,5 +1,5 @@
 addEventListener('mousedown', (event) => {
-    if(!players[socket.id]) return;
+    if(!frontendPlayers[socket.id]) return;
 
     var mouseX = event.clientX;
     var mouseY = event.clientY;
@@ -40,7 +40,7 @@ addEventListener('mousedown', (event) => {
 });
 
 addEventListener('mousemove', (event) => {
-    if(!players[socket.id] ) return;
+    if(!frontendPlayers[socket.id] ) return;
 
     for(const i in cards){
         if(cards[i].moving){
@@ -55,7 +55,7 @@ addEventListener('mousemove', (event) => {
 });
 
 addEventListener('mouseup', (event) => {
-    if(!players[socket.id]) return;
+    if(!frontendPlayers[socket.id]) return;
 
     for(const i in cards){
         if(cards[i].moving){
@@ -72,7 +72,7 @@ addEventListener('mouseup', (event) => {
 });
 
 addEventListener('keydown', (event) => {
-    if(!players[socket.id]) return;
+    if(!frontendPlayers[socket.id]) return;
 
     switch(event.keyCode){
         case 16:

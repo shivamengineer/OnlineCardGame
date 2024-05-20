@@ -8,7 +8,7 @@ const socket = io();
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-const players = {};
+const frontendPlayers = {};
 const cards = {};
 const menuOptions = {};
 var menuAttribs = [0, 0, 75, 20, "white"];
@@ -32,22 +32,23 @@ socket.on('updatePlayers', (backendPlayers, backendCards) => {
 
   for(const id in backendPlayers){
     const backendPlayer = backendPlayers[id];
-    if(!players[id]){
-      players[id] = new Rect(backendPlayer.x + (50 * numPlayers), backendPlayer.y, 30, 30, "white");
-      players[id].playerNum = numPlayers;
+    if(!frontendPlayers[id]){
+      backendPlayer.x += 50 * numPlayers;
+      frontendPlayers[id] = new Rect(backendPlayer.x, backendPlayer.y, 30, 30, "white");
+      frontendPlayers[id].playerNum = numPlayers;
       numPlayers++;
     }
   }
   
-  for(const id in players){
+  for(const id in frontendPlayers){
     if(!backendPlayers[id]){
-      var temp = players[id].playerNum;
-      delete players[id];
+      var temp = frontendPlayers[id].playerNum;
+      delete frontendPlayers[id];
       if(temp < numPlayers){
-        for(const id2 in players){
-          if(players[id2].playerNum > temp){
-            players[id2].playerNum--;
-            players[id2].x -= 50;
+        for(const id2 in frontendPlayers){
+          if(frontendPlayers[id2].playerNum > temp){
+            frontendPlayers[id2].playerNum--;
+            frontendPlayers[id2].x -= 50;
           }
         }
       }
@@ -68,8 +69,8 @@ function draw() {
     cards[i].renderCard(img);
   }
 
-  for(const id in players){
-    const newPlayer = players[id];
+  for(const id in frontendPlayers){
+    const newPlayer = frontendPlayers[id];
     newPlayer.render();
   }
 
