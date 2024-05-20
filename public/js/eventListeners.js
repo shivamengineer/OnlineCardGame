@@ -72,9 +72,15 @@ addEventListener('mouseup', (event) => {
 });
 
 addEventListener('keydown', (event) => {
+    if(!players[socket.id]) return;
+
     switch(event.keyCode){
         case 16:
             shift = true;
+            break;
+        case 65:
+            console.log("A2");
+            socket.emit('keydown', 65);
             break;
     }
 });

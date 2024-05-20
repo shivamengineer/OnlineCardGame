@@ -28,8 +28,7 @@ for(i = 0; i < 2; i++){
 
 const degree = Math.PI / 180;
 
-socket.on('updatePlayers', (backendPlayers) => {
-
+socket.on('updatePlayers', (backendPlayers, backendCards) => {
 
   for(const id in backendPlayers){
     const backendPlayer = backendPlayers[id];
