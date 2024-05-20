@@ -14,8 +14,9 @@ const menuOptions = {};
 var menuAttribs = [0, 0, 75, 20, "white"];
 var menuTitles = ["rotate right", "rotate left"];
 var cardMenuOpen = false;
-var cardSelected = -1;
 var shift = false;
+var numPlayers = 0;
+var cardSelected = -1;
 
 for(i = 0; i < 5; i++){
   cards[i] = new Card(4, 2, false, i, 20 + (70 * i), 150);
@@ -28,20 +29,34 @@ for(i = 0; i < 2; i++){
 const degree = Math.PI / 180;
 
 socket.on('updatePlayers', (backendPlayers) => {
+
+
   for(const id in backendPlayers){
     const backendPlayer = backendPlayers[id];
     if(!players[id]){
-      players[id] = new Rect(backendPlayer.x + (50 * backendPlayer.index), backendPlayer.y, 30, 30, "white");
+      players[id] = new Rect(backendPlayer.x + (50 * numPlayers), backendPlayer.y, 30, 30, "white");
+      players[id].playerNum = numPlayers;
+      numPlayers++;
     }
   }
   
   for(const id in players){
     if(!backendPlayers[id]){
+      var temp = players[id].playerNum;
       delete players[id];
+      if(temp < numPlayers){
+        for(const id2 in players){
+          if(players[id2].playerNum > temp){
+            players[id2].playerNum--;
+            players[id2].x -= 50;
+          }
+        }
+      }
+      numPlayers--;
     }
   }
 
-  console.log(players);
+  //console.log(players);
 
   draw();
 });
