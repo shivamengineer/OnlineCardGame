@@ -28,7 +28,7 @@ for(i = 0; i < 2; i++){
 
 const degree = Math.PI / 180;
 
-socket.on('updatePlayers', (backendPlayers, backendCards) => {
+socket.on('updatePlayers', (backendPlayers) => {
 
   for(const id in backendPlayers){
     const backendPlayer = backendPlayers[id];
@@ -59,6 +59,10 @@ socket.on('updatePlayers', (backendPlayers, backendCards) => {
   //console.log(players);
 
   draw();
+});
+
+socket.on('updateLocal', (backendPlayers, socketID) => {
+  console.log("TEST");
 });
 
 function draw() {
