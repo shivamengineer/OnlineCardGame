@@ -9,7 +9,7 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 const frontendPlayers = {};
-const cards = {};
+const frontendCards = {};
 const menuOptions = {};
 var menuAttribs = [0, 0, 75, 20, "white"];
 var menuTitles = ["rotate right", "rotate left"];
@@ -19,7 +19,7 @@ var numPlayers = 0;
 var cardSelected = -1;
 
 for(i = 0; i < 5; i++){
-  cards[i] = new Card(4, 2, false, i, 20 + (70 * i), 150);
+  frontendCards[i] = new Card(4, 2, false, i, 20 + (70 * i), 150);
 }
 
 for(i = 0; i < 2; i++){
@@ -70,7 +70,7 @@ function draw() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   for(i = 0; i < 5; i++){
-    cards[i].renderCard(img);
+    frontendCards[i].renderCard(img);
   }
 
   for(const id in frontendPlayers){

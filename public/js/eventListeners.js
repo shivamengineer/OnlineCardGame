@@ -10,16 +10,16 @@ addEventListener('mousedown', (event) => {
             if(mouseCollides(mouseX, mouseY, menuOptions[i])){
                 console.log("selected option" + i);
                 if(i == 0){
-                    cards[cardSelected].rotation++
+                    frontendCards[cardSelected].rotation++;
                 } else if(i == 1){
-                    cards[cardSelected].rotation--;
+                    frontendCards[cardSelected].rotation--;
                 }
             }
         }
         cardMenuOpen = false;
     } else {
-        for(const i in cards){
-            if(mouseCollidesCard(mouseX, mouseY, cards[i], img)){
+        for(const i in frontendCards){
+            if(mouseCollidesCard(mouseX, mouseY, frontendCards[i], img)){
                 if(shift){
                     cardMenuOpen = true;
                     cardSelected = i;
@@ -28,9 +28,9 @@ addEventListener('mousedown', (event) => {
                         menuOptions[j].y = mouseY + (j * 22);
                     }
                 } else {
-                    cards[i].moving = true;
-                    cards[i].differenceX = mouseX - cards[i].x;
-                    cards[i].differenceY = mouseY - cards[i].y;
+                    frontendCards[i].moving = true;
+                    frontendCards[i].differenceX = mouseX - frontendCards[i].x;
+                    frontendCards[i].differenceY = mouseY - frontendCards[i].y;
                 }
             }
         }
@@ -42,12 +42,12 @@ addEventListener('mousedown', (event) => {
 addEventListener('mousemove', (event) => {
     if(!frontendPlayers[socket.id] ) return;
 
-    for(const i in cards){
-        if(cards[i].moving){
-            var mouseX = event.clientX - cards[i].differenceX;
-            var mouseY = event.clientY - cards[i].differenceY;
-            cards[i].x = mouseX;
-            cards[i].y = mouseY;
+    for(const i in frontendCards){
+        if(frontendCards[i].moving){
+            var mouseX = event.clientX - frontendCards[i].differenceX;
+            var mouseY = event.clientY - frontendCards[i].differenceY;
+            frontendCards[i].x = mouseX;
+            frontendCards[i].y = mouseY;
         }
     }
 
@@ -57,13 +57,13 @@ addEventListener('mousemove', (event) => {
 addEventListener('mouseup', (event) => {
     if(!frontendPlayers[socket.id]) return;
 
-    for(const i in cards){
-        if(cards[i].moving){
-            var mouseX = event.clientX - cards[i].differenceX;
-            var mouseY = event.clientY - cards[i].differenceY;
-            cards[i].x = mouseX;
-            cards[i].y = mouseY;
-            cards[i].moving = false;
+    for(const i in frontendCards){
+        if(frontendCards[i].moving){
+            var mouseX = event.clientX - frontendCards[i].differenceX;
+            var mouseY = event.clientY - frontendCards[i].differenceY;
+            frontendCards[i].x = mouseX;
+            frontendCards[i].y = mouseY;
+            frontendCards[i].moving = false;
         }
     }
 
