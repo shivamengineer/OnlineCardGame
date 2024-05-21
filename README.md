@@ -1,6 +1,4 @@
 # OnlineCardGame
-multiplayer online card game
+Multiplayer Online Card Game
 
-Uses express v. 4.18.2 and socket.io 4.7.5
-need to install nodemon
-to run, call nodemon app.js in terminal
+use node app.js in terminal in folder to run
