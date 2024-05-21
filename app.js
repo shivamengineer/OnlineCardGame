@@ -16,7 +16,6 @@ app.get('/', (req, res) => {
 });
 
 const players = {};
-const cards = {};
 players.numPlayers = 0;
 
 io.on('connection', (socket) => {
@@ -33,20 +32,19 @@ io.on('connection', (socket) => {
     console.log(reason);
     delete players[socket.id];
     players.numPlayers--;
-    io.emit('updatePlayers', players, cards);
+    io.emit('updatePlayers', players);
   });
 
   socket.on('keydown', (keycode) => {
     switch(keycode){
       case 65:
-        console.log(socket.id);
-        console.log("A1");
+        socket.emit('updateLocal', players, socket.id);
         break;
     }
   })
 
   //socket.emit for local, io.emit for everyone
-  io.emit('updatePlayers', players, cards);
+  io.emit('updatePlayers', players);
 
 });
 
