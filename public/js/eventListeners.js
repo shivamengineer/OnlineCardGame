@@ -13,6 +13,9 @@ addEventListener('mousedown', (event) => {
                     frontendCards[cardSelected].rotation++;
                 } else if(i == 1){
                     frontendCards[cardSelected].rotation--;
+                    while(frontendCards[cardSelected].rotation < 0){
+                        frontendCards[cardSelected].rotation += 4;
+                    }
                 }
             }
         }
@@ -57,7 +60,16 @@ addEventListener('mousemove', (event) => {
 addEventListener('mouseup', (event) => {
     if(!frontendPlayers[socket.id]) return;
 
+    var mouseX = event.clientX - frontendCards[i].differenceX;
+    var mouseY = event.clientY - frontendCards[i].differenceY;
+
+    socket.emit('mouseup', frontendCards, mouseX, mouseY);
+
     for(const i in frontendCards){
+        frontendCards[i].moving = false;
+    }
+
+    /*for(const i in frontendCards){
         if(frontendCards[i].moving){
             var mouseX = event.clientX - frontendCards[i].differenceX;
             var mouseY = event.clientY - frontendCards[i].differenceY;
@@ -65,7 +77,7 @@ addEventListener('mouseup', (event) => {
             frontendCards[i].y = mouseY;
             frontendCards[i].moving = false;
         }
-    }
+    }*/
 
     draw();
 
