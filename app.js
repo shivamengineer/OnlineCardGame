@@ -16,10 +16,28 @@ app.get('/', (req, res) => {
 });
 
 const players = {};
+const cards = {};
 players.numPlayers = 0;
+var started = false;
 
 io.on('connection', (socket) => {
+
+  if(!started){
+    for(i = 0; i < 5; i++){
+      cards[i] = {
+        value: 1,
+        suit: 2,
+        visible: true,
+        cardID: i,
+        x: 20 + (70 * i),
+        y: 150
+      }
+    }
+    started = true;
+  }
+
   console.log('a user connected');
+
   const numPlayers = players.numPlayers;
   players[socket.id] = {
     x: 100,
@@ -32,7 +50,7 @@ io.on('connection', (socket) => {
     console.log(reason);
     delete players[socket.id];
     players.numPlayers--;
-    io.emit('updatePlayers', players);
+    io.emit('updatePlayers', players, cards);
   });
 
   socket.on('keydown', (keycode) => {
@@ -41,10 +59,20 @@ io.on('connection', (socket) => {
         socket.emit('updateLocal', players, socket.id);
         break;
     }
-  })
+  });
+
+  socket.on('mouseup', (frontendCards, mouseX, mouseY) => {
+    for(const i in frontendCards){
+      if(frontendCards[i].moving){
+        cards[i].x = mouseX;
+        cards[i].y = mouseY;
+        frontendCards[i].moving = false;
+    }
+    }
+  });
 
   //socket.emit for local, io.emit for everyone
-  io.emit('updatePlayers', players);
+  io.emit('updatePlayers', players, cards);
 
 });
 
