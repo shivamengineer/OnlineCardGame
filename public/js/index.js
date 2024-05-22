@@ -18,17 +18,13 @@ var shift = false;
 var numPlayers = 0;
 var cardSelected = -1;
 
-for(i = 0; i < 5; i++){
-  frontendCards[i] = new Card(4, 2, false, i, 20 + (70 * i), 150);
-}
-
 for(i = 0; i < 2; i++){
   menuOptions[i] = new Rect(0, 0, menuAttribs[2], menuAttribs[3], menuAttribs[4]);
 }
 
 const degree = Math.PI / 180;
 
-socket.on('updatePlayers', (backendPlayers) => {
+socket.on('updatePlayers', (backendPlayers, backendCards) => {
 
   for(const id in backendPlayers){
     const backendPlayer = backendPlayers[id];
@@ -56,6 +52,13 @@ socket.on('updatePlayers', (backendPlayers) => {
     }
   }
 
+  for(const i in backendCards){
+    const backendCard = backendCards[i];
+    if(!frontendCards[i]){
+      frontendCards[i] = new Card(backendCard.value, backendCard.suit, backendCard.visible, backendCard.cardID, backendCard.x, backendCard.y);
+    }
+  }
+
   //console.log(players);
 
   draw();
@@ -69,7 +72,7 @@ function draw() {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  for(i = 0; i < 5; i++){
+  for(const i in frontendCards){
     frontendCards[i].renderCard(img);
   }
 
