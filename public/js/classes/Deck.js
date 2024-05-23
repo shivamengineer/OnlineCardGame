@@ -1,11 +1,7 @@
-class Deck extends Card {
+class Deck{
     constructor() {
         this.length = 0;
         this.deck = [];
-    }
-    constructor(cards){
-        this.length = cards.length();
-        this.deck = cards;
     }
 
     add(card, pos){
@@ -70,6 +66,10 @@ class Deck extends Card {
         return c;
     }
 
+    seeSuit(i) {
+        this.seeCard.suit();
+    }
+
     hasCard(c) {
         this.deck.forEach((item, index) =>{
             if(this.deck.seeCard(index).equals(c)) {
@@ -94,6 +94,7 @@ class Deck extends Card {
             this.length++
         });
     }
+
 
 
 
