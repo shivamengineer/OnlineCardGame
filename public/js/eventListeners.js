@@ -69,16 +69,6 @@ addEventListener('mouseup', (event) => {
         frontendCards[i].moving = false;
     }
 
-    /*for(const i in frontendCards){
-        if(frontendCards[i].moving){
-            var mouseX = event.clientX - frontendCards[i].differenceX;
-            var mouseY = event.clientY - frontendCards[i].differenceY;
-            frontendCards[i].x = mouseX;
-            frontendCards[i].y = mouseY;
-            frontendCards[i].moving = false;
-        }
-    }*/
-
     draw();
 
 });
