@@ -56,7 +56,7 @@ io.on('connection', (socket) => {
   socket.on('keydown', (keycode) => {
     switch(keycode){
       case 65:
-        socket.emit('updateLocal', players, socket.id);
+        console.log("Test");
         break;
     }
   });
@@ -67,8 +67,9 @@ io.on('connection', (socket) => {
         cards[i].x = mouseX;
         cards[i].y = mouseY;
         frontendCards[i].moving = false;
+      }
     }
-    }
+    io.emit('updatePlayers', players, cards);
   });
 
   //socket.emit for local, io.emit for everyone
