@@ -1,4 +1,4 @@
-class Deck {
+class Deck extends Card {
     constructor() {
         this.length = 0;
         this.deck = [];
@@ -42,7 +42,7 @@ class Deck {
         this.length++;
     }
 
-    addToTop(card) {
+    addToTop(val, suit, vis, iD) {
         this.deck.push(new Card(val, suit, vis, iD));
         this.length++;
     }
@@ -51,11 +51,50 @@ class Deck {
         return this.deck.splice(i, i);
     }
 
-    // removeCard(val, suit, iD) {
-
-    // }
+    removeCard(val, suit, vis, iD) {
+        i = this.deck.indexOf(val, suit, vis, iD);
+        return this.deck.splice(i, 1);
+    }
 
     length() {
         return this.length;
     }
+
+    index(card) {
+        return this.deck.indexOf(card);
+    }
+
+    seeCard(i) {
+        c = this.deck.removeCard(i);
+        this.deck.add(c, i);
+        return c;
+    }
+
+    hasCard(c) {
+        this.deck.forEach((item, index) =>{
+            if(this.deck.seeCard(index).equals(c)) {
+                return true;
+            }
+        });
+        return false;
+    }
+
+    flip() {
+        this.deck.reverse();
+    }
+
+    cut(start, end) {
+        this.length -= (end - start);
+        return this.deck.splice(start, end);
+    }
+
+    addDeck(d) {
+        d.forEach(item =>{
+            this.deck[this.length] = item;
+            this.length++
+        });
+    }
+
+
+
 }
