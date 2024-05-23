@@ -56,16 +56,15 @@ socket.on('updatePlayers', (backendPlayers, backendCards) => {
     const backendCard = backendCards[i];
     if(!frontendCards[i]){
       frontendCards[i] = new Card(backendCard.value, backendCard.suit, backendCard.visible, backendCard.cardID, backendCard.x, backendCard.y);
+    } else {
+      frontendCards[i].x = backendCards[i].x;
+      frontendCards[i].y = backendCards[i].y;
     }
   }
 
   //console.log(players);
 
   draw();
-});
-
-socket.on('updateLocal', (backendPlayers, socketID) => {
-  console.log("TEST");
 });
 
 function draw() {
