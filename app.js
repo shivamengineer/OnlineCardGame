@@ -32,10 +32,7 @@ io.on('connection', (socket) => {
   connectPlayer(socket.id);
 
   socket.on('disconnect', (reason) => {
-    console.log(reason);
-    delete players[socket.id];
-    players.numPlayers--;
-    io.emit('updatePlayers', players, cards);
+    disconnectPlayer(socket.id);
   });
 
   socket.on('keydown', (keycode) => {
@@ -84,6 +81,12 @@ function connectPlayer(socketID){
     index: numPlayers
   };
   players.numPlayers++;
+}
+
+function disconnectPlayer(socketID){
+  delete players[socketID];
+  players.numPlayers--;
+  io.emit('updatePlayers', players, cards);
 }
 
 function moveCard(x, y, i){
