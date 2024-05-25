@@ -61,14 +61,15 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('mouseup', (frontendCards, mouseX, mouseY) => {
-    for(const i in frontendCards){
-      if(frontendCards[i].moving){
-        cards[i].x = mouseX;
-        cards[i].y = mouseY;
-        frontendCards[i].moving = false;
-      }
-    }
+  socket.on('mousemove', (frontendCards, mouseX, mouseY, i) => {
+    cards[i].x = mouseX;
+    cards[i].y = mouseY;
+    io.emit('updatePlayers', players, cards);
+  });
+
+  socket.on('mouseup', (frontendCards, mouseX, mouseY, i) => {
+    cards[i].x = mouseX;
+    cards[i].y = mouseY;
     io.emit('updatePlayers', players, cards);
   });
 
