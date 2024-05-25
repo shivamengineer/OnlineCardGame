@@ -60,13 +60,13 @@ addEventListener('mousemove', (event) => {
 addEventListener('mouseup', (event) => {
     if(!frontendPlayers[socket.id]) return;
 
-    var mouseX = event.clientX - frontendCards[i].differenceX;
-    var mouseY = event.clientY - frontendCards[i].differenceY;
-
-    socket.emit('mouseup', frontendCards, mouseX, mouseY);
-
     for(const i in frontendCards){
-        frontendCards[i].moving = false;
+        if(frontendCards[i].moving){
+            var mouseX = event.clientX - frontendCards[i].differenceX;
+            var mouseY = event.clientY - frontendCards[i].differenceY;
+            socket.emit('mouseup', frontendCards, mouseX, mouseY);
+            frontendCards[i].moving = false;
+        }
     }
 
     draw();
