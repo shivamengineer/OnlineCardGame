@@ -22,29 +22,14 @@ var started = false;
 
 io.on('connection', (socket) => {
 
+  console.log('a user connected');
+
   if(!started){
-    for(i = 0; i < 5; i++){
-      cards[i] = {
-        value: 1,
-        suit: 2,
-        visible: true,
-        cardID: i,
-        x: 20 + (70 * i),
-        y: 150
-      }
-    }
+    start();
     started = true;
   }
 
-  console.log('a user connected');
-
-  const numPlayers = players.numPlayers;
-  players[socket.id] = {
-    x: 100,
-    y: 100,
-    index: numPlayers
-  };
-  players.numPlayers++;
+  connectPlayer(socket.id);
 
   socket.on('disconnect', (reason) => {
     console.log(reason);
@@ -61,16 +46,12 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('mousemove', (frontendCards, mouseX, mouseY, i) => {
-    cards[i].x = mouseX;
-    cards[i].y = mouseY;
-    io.emit('updatePlayers', players, cards);
+  socket.on('mousemove', (mouseX, mouseY, i) => {
+    moveCard(mouseX, mouseY, i);
   });
 
-  socket.on('mouseup', (frontendCards, mouseX, mouseY, i) => {
-    cards[i].x = mouseX;
-    cards[i].y = mouseY;
-    io.emit('updatePlayers', players, cards);
+  socket.on('mouseup', (mouseX, mouseY, i) => {
+    moveCard(mouseX, mouseY, i);
   });
 
   //socket.emit for local, io.emit for everyone
@@ -81,3 +62,32 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+
+function start(){
+  for(i = 0; i < 5; i++){
+    cards[i] = {
+      value: 1,
+      suit: 2,
+      visible: true,
+      cardID: i,
+      x: 20 + (70 * i),
+      y: 150
+    }
+  }
+}
+
+function connectPlayer(socketID){
+  const numPlayers = players.numPlayers
+  players[socketID] = {
+    x: 100,
+    y: 100,
+    index: numPlayers
+  };
+  players.numPlayers++;
+}
+
+function moveCard(x, y, i){
+  cards[i].x = x;
+  cards[i].y = y;
+  io.emit('updatePlayers', players, cards);
+}
