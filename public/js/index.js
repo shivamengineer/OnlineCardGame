@@ -27,6 +27,6 @@ const degree = Math.PI / 180;
 socket.on('updatePlayers', (backendPlayers, backendCards) => {
   connectPlayer(backendPlayers, frontendPlayers);
   removePlayer(backendPlayers, frontendPlayers);
-  updateCards(backendCards, frontendPlayers);
+  updateCards(backendCards, frontendCards);
   draw();
 });
