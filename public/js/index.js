@@ -25,36 +25,11 @@ for(i = 0; i < 2; i++){
 const degree = Math.PI / 180;
 
 socket.on('updatePlayers', (backendPlayers, backendCards) => {
-
   connectPlayer(backendPlayers);
-  
   removePlayer(backendPlayers);
-
   updateCards(backendCards);
-
   draw();
 });
-
-function draw() {
-  ctx.fillStyle = "black";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  for(const i in frontendCards){
-    frontendCards[i].renderCard(img);
-  }
-
-  for(const id in frontendPlayers){
-    const newPlayer = frontendPlayers[id];
-    newPlayer.render();
-  }
-
-  if(cardMenuOpen){
-    for(const i in menuOptions){
-      menuOptions[i].render();
-      menuOptions[i].renderText(menuTitles[i]);
-    }
-  }
-}
 
 function connectPlayer(backendPlayers){
   for(const id in backendPlayers){
