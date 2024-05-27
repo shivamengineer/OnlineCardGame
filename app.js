@@ -36,11 +36,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('keydown', (keycode) => {
-    switch(keycode){
-      case 65:
-        console.log("Test");
-        break;
-    }
+    keyDown(keycode);
   });
 
   socket.on('mousemove', (mouseX, mouseY, i) => {
@@ -87,6 +83,14 @@ function disconnectPlayer(socketID){
   delete players[socketID];
   players.numPlayers--;
   io.emit('updatePlayers', players, cards);
+}
+
+function keyDown(keycodeValue){
+  switch(keycodeValue){
+    case 65:
+      console.log("Test");
+      break;
+  }
 }
 
 function moveCard(x, y, i){
