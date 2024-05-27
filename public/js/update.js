@@ -1,8 +1,8 @@
-function connectPlayer(backendPlayers, frontendPlayers){
+function connectPlayer(backendPlayers){
     for(const id in backendPlayers){
       const backendPlayer = backendPlayers[id];
       if(!frontendPlayers[id]){
-        backendPlayer.x += 50 * numPlayers;
+        backendPlayer.x += distanceBetweenPlayers * numPlayers;
         frontendPlayers[id] = new Rect(backendPlayer.x, backendPlayer.y, 30, 30, "white");
         frontendPlayers[id].playerNum = numPlayers;
         numPlayers++;
@@ -10,25 +10,18 @@ function connectPlayer(backendPlayers, frontendPlayers){
     }
 }
 
-function removePlayer(backendPlayers, frontendPlayers){
+function removePlayer(backendPlayers){
     for(const id in frontendPlayers){
       if(!backendPlayers[id]){
         var temp = frontendPlayers[id].playerNum;
         delete frontendPlayers[id];
-        if(temp < numPlayers){
-          for(const id2 in frontendPlayers){
-            if(frontendPlayers[id2].playerNum > temp){
-              frontendPlayers[id2].playerNum--;
-              frontendPlayers[id2].x -= 50;
-            }
-          }
-        }
+        shiftPlayersLeft(temp);
         numPlayers--;
       }
     }
 }
 
-function updateCards(backendCards, frontendCards){
+function updateCards(backendCards){
     for(const i in backendCards){
       const backendCard = backendCards[i];
       if(!frontendCards[i]){
@@ -38,4 +31,15 @@ function updateCards(backendCards, frontendCards){
         frontendCards[i].y = backendCards[i].y;
       }
     }
+}
+
+function shiftPlayersLeft(temp){
+  if(temp < numPlayers){
+    for(const id2 in frontendPlayers){
+      if(frontendPlayers[id2].playerNum > temp){
+        frontendPlayers[id2].playerNum--;
+        frontendPlayers[id2].x -= distanceBetweenPlayers;
+      }
+    }
+  }
 }

@@ -11,6 +11,7 @@ canvas.height = innerHeight;
 const frontendPlayers = {};
 const frontendCards = {};
 const menuOptions = {};
+const distanceBetweenPlayers = 50;
 var menuAttribs = [0, 0, 75, 20, "white"];
 var menuTitles = ["rotate right", "rotate left"];
 var cardMenuOpen = false;
@@ -25,8 +26,8 @@ for(i = 0; i < 2; i++){
 const degree = Math.PI / 180;
 
 socket.on('updatePlayers', (backendPlayers, backendCards) => {
-  connectPlayer(backendPlayers, frontendPlayers);
-  removePlayer(backendPlayers, frontendPlayers);
-  updateCards(backendCards, frontendCards);
+  connectPlayer(backendPlayers);
+  removePlayer(backendPlayers);
+  updateCards(backendCards);
   draw();
 });
