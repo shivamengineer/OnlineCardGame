@@ -1,8 +1,15 @@
 function draw() {
-  clearscreen();
-  drawCards();
-  drawPlayers();
-  drawMenu();
+    clearscreen();
+    if(homescreen){
+        drawHomeScreenButton();
+    } else {
+        drawGame();
+    }
+}
+
+function drawHomeScreenButton(){
+    homeScreenRect.render();
+    homeScreenRect.renderText("Home Screen");
 }
 
 function clearscreen(){
@@ -23,11 +30,18 @@ function drawPlayers(){
     }
 }
 
-function drawMenu(){
+function drawMenuOptions(){
     if(cardMenuOpen){
         for(const i in menuOptions){
           menuOptions[i].render();
           menuOptions[i].renderText(menuTitles[i]);
         }
     }
+}
+
+function drawGame(){
+    drawHomeScreenButton();
+    drawCards();
+    drawPlayers();
+    drawMenuOptions();
 }
