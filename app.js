@@ -69,6 +69,12 @@ function start(){
   }
 }
 
+function end(){
+  for(i = 0; i < 5; i++){
+    delete cards[i];
+  }
+}
+
 function connectPlayer(socketID){
   const numPlayers = players.numPlayers
   players[socketID] = {
@@ -82,10 +88,18 @@ function connectPlayer(socketID){
 function disconnectPlayer(socketID){
   delete players[socketID];
   players.numPlayers--;
+  if(players.numPlayers == 0){
+    end();
+    started = false;
+  }
   io.emit('updatePlayers', players, cards);
 }
 
 function keyDown(keycodeValue){
+  keyDownGame(keycodeValue);
+}
+
+function keyDownGame(keycodeValue){
   switch(keycodeValue){
     case 65:
       console.log("Test");
@@ -94,6 +108,10 @@ function keyDown(keycodeValue){
 }
 
 function moveCard(x, y, i){
+  moveCardGame(x, y, i);
+}
+
+function moveCardGame(x, y, i){
   cards[i].x = x;
   cards[i].y = y;
   io.emit('updatePlayers', players, cards);
