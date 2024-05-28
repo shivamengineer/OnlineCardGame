@@ -44,40 +44,44 @@ class Deck{
     }
 
     removeCard(i) {
+        assert(this.length > i, "index out of bounds");
         return this.deck.splice(i, i);
+        this.length--;
     }
 
     removeCard(val, suit, vis, iD) {
+        c = val, suit, vis, iD;
+        assert(this.deck.hasCard(c), "card not in deck");
         i = this.deck.indexOf(val, suit, vis, iD);
         return this.deck.splice(i, 1);
+        this.length--;
     }
 
     length() {
         return this.length;
     }
 
-    index(card) {
-        return this.deck.indexOf(card);
-    }
-
     seeCard(i) {
+        assert(this.length > i, "index out of bounds");
         c = this.deck.removeCard(i);
         this.deck.add(c, i);
         return c;
     }
 
     seeSuit(i) {
+        assert(this.length > i, "index out of bounds");
         this.seeCard.suit();
     }
 
     hasCard(c) {
-        this.deck.forEach((item, index) =>{
-            if(this.deck.seeCard(index).equals(c)) {
+        for(i = 0; i < this.length; i++) {
+            if(this.deck.seeCard(index).equal(c)) {
                 return true;
             }
-        });
+        }
         return false;
     }
+
 
     flip() {
         this.deck.reverse();
@@ -93,6 +97,14 @@ class Deck{
             this.deck[this.length] = item;
             this.length++
         });
+    }
+
+    shuffle() {
+        for(i = this.length; i >= 0; i--) {
+            r = Math.floor(Math.random() * i);
+            c = this.removeCard(r);
+            this.addToTop(c);
+        }
     }
 
 

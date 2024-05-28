@@ -11,6 +11,15 @@ class Card extends Rect {
         this.differenceX = 0;
         this.differenceY = 0;
     }
+    
+    equal(c) {
+        if(this.value != c.value) {
+            return false;
+        } else if (this.suit != c.suit) {
+            return false;
+        } 
+        return true;
+    }
 
     renderCard(image){
         ctx2.save();
