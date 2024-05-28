@@ -1,4 +1,25 @@
-function mouseDownEvent(frontendCards, e){
+function mouseDownEvent(e){
+    if(!homescreen){
+        mouseDownEventGame(e);
+        mouseDownEventHomescreen(e);
+    } else {
+        mouseDownEventHomescreen(e);
+    }
+}
+
+function mouseMoveEvent(e){
+    if(!homescreen){
+        mouseMoveEventGame(e);
+    }
+}
+
+function mouseUpEvent(e){
+    if(!homescreen){
+        mouseUpEventGame(e);
+    }
+}
+
+function mouseDownEventGame(e){
     var mouseX = e.clientX;
     var mouseY = e.clientY;
 
@@ -8,11 +29,10 @@ function mouseDownEvent(frontendCards, e){
     } else {
         selectCardOrMenu(mouseX, mouseY);
     }
-
     draw();
 }
 
-function mouseMoveEvent(e){
+function mouseMoveEventGame(e){
     for(const i in frontendCards){
         if(frontendCards[i].moving){
             var mouseX = e.clientX - frontendCards[i].differenceX;
@@ -23,7 +43,7 @@ function mouseMoveEvent(e){
     draw();
 }
 
-function mouseUpEvent(e){
+function mouseUpEventGame(e){
     for(const i in frontendCards){
         if(frontendCards[i].moving){
             var mouseX = e.clientX - frontendCards[i].differenceX;
@@ -32,7 +52,6 @@ function mouseUpEvent(e){
             frontendCards[i].moving = false;
         }
     }
-
     draw();
 }
 
@@ -67,5 +86,15 @@ function selectCardOrMenu(mouseX, mouseY){
                 frontendCards[i].differenceY = mouseY - frontendCards[i].y;
             }
         }
+    }
+}
+
+function mouseDownEventHomescreen(e){
+    var mouseX = e.clientX;
+    var mouseY = e.clientY;
+    if(mouseCollides(mouseX, mouseY, homeScreenRect)){
+        homescreen = !homescreen;
+        console.log(homescreen);
+        draw();
     }
 }

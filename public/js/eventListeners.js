@@ -1,6 +1,6 @@
 addEventListener('mousedown', (event) => {
     if(!frontendPlayers[socket.id]) return;
-    mouseDownEvent(frontendCards, event);
+    mouseDownEvent(event);
 });
 
 addEventListener('mousemove', (event) => {
