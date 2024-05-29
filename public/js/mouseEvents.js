@@ -94,7 +94,11 @@ function mouseDownEventHomescreen(e){
     var mouseY = e.clientY;
     if(mouseCollides(mouseX, mouseY, homeScreenRect)){
         homescreen = !homescreen;
-        console.log(homescreen);
+        if(homescreen){
+            homeScreenRect.text = "Game";
+        } else {
+            homeScreenRect.text = "Home Screen"
+        }
         draw();
     }
 }
