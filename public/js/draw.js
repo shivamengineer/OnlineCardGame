@@ -9,7 +9,7 @@ function draw() {
 
 function drawHomeScreenButton(){
     homeScreenRect.render();
-    homeScreenRect.renderText("Home Screen");
+    homeScreenRect.renderText(homeScreenRect.text);
 }
 
 function clearscreen(){
