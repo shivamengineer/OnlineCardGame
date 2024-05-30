@@ -19,15 +19,16 @@ var shift = false;
 var numPlayers = 0;
 var cardSelected = -1;
 var homescreen = false;
-var homeScreenRect = new Rect(300, 300, 200, 50, "white");
+var homeScreenRect = new Rect(400, 300, 100, 30, "white");
 homeScreenRect.text = "Home Screen";
+const degree = Math.PI / 180;
+
+var rect2 = new Rect(400, 600, 50, 50, "pink");
 
 
 for(i = 0; i < 2; i++){
   menuOptions[i] = new Rect(0, 0, menuAttribs[2], menuAttribs[3], menuAttribs[4]);
 }
-
-const degree = Math.PI / 180;
 
 socket.on('updatePlayers', (backendPlayers, backendCards) => {
   connectPlayer(backendPlayers);
