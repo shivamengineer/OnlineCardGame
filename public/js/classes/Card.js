@@ -44,6 +44,8 @@ class Card extends Rect {
                 pos[1] = this.x
                 break;
         }
+        //pos[0] = (this.x * Math.cos(this.rotation * degree * 90)) - (this.y * Math.sin(this.rotation * degree * 90));
+        //pos[1] = (this.x * Math.sin(this.rotation * degree * 90)) + (this.y * Math.cos(this.rotation * degree * 90));
         ctx2.drawImage(image, pos[0], pos[1]);
         ctx2.restore();
     }
