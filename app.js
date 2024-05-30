@@ -1,3 +1,4 @@
+const ioEventsLib = require('./ioEvents');
 const express = require('express');
 const app = express();
 
@@ -25,26 +26,28 @@ io.on('connection', (socket) => {
   console.log('a user connected');
 
   if(!started){
-    start();
+    ioEventsLib.start(cards);
     started = true;
   }
 
-  connectPlayer(socket.id);
+  ioEventsLib.connectPlayer(socket.id, players);
 
   socket.on('disconnect', (reason) => {
     disconnectPlayer(socket.id);
   });
 
   socket.on('keydown', (keycode) => {
-    keyDown(keycode);
+    ioEventsLib.keyDown(keycode);
   });
 
   socket.on('mousemove', (mouseX, mouseY, i) => {
-    moveCard(mouseX, mouseY, i);
+    ioEventsLib.moveCard(mouseX, mouseY, i, cards);
+    io.emit('updatePlayers', players, cards);
   });
 
   socket.on('mouseup', (mouseX, mouseY, i) => {
-    moveCard(mouseX, mouseY, i);
+    ioEventsLib.moveCard(mouseX, mouseY, i, cards);
+    io.emit('updatePlayers', players, cards);
   });
 
   //socket.emit for local, io.emit for everyone
@@ -56,33 +59,10 @@ server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-function start(){
-  for(i = 0; i < 5; i++){
-    cards[i] = {
-      value: 1,
-      suit: 2,
-      visible: true,
-      cardID: i,
-      x: 20 + (70 * i),
-      y: 150
-    }
-  }
-}
-
 function end(){
   for(i = 0; i < 5; i++){
-    delete cards[i];
+      delete(cards[i]);
   }
-}
-
-function connectPlayer(socketID){
-  const numPlayers = players.numPlayers
-  players[socketID] = {
-    x: 100,
-    y: 100,
-    index: numPlayers
-  };
-  players.numPlayers++;
 }
 
 function disconnectPlayer(socketID){
@@ -92,27 +72,5 @@ function disconnectPlayer(socketID){
     end();
     started = false;
   }
-  io.emit('updatePlayers', players, cards);
-}
-
-function keyDown(keycodeValue){
-  keyDownGame(keycodeValue);
-}
-
-function keyDownGame(keycodeValue){
-  switch(keycodeValue){
-    case 65:
-      console.log("Test");
-      break;
-  }
-}
-
-function moveCard(x, y, i){
-  moveCardGame(x, y, i);
-}
-
-function moveCardGame(x, y, i){
-  cards[i].x = x;
-  cards[i].y = y;
   io.emit('updatePlayers', players, cards);
 }
