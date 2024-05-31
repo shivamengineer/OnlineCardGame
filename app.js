@@ -59,17 +59,11 @@ server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-function end(){
-  for(i = 0; i < 5; i++){
-      delete(cards[i]);
-  }
-}
-
 function disconnectPlayer(socketID){
   delete players[socketID];
   players.numPlayers--;
   if(players.numPlayers == 0){
-    end();
+    ioEventsLib.end(cards);
     started = false;
   }
   io.emit('updatePlayers', players, cards);
