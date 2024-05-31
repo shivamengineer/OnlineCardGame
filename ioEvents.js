@@ -20,6 +20,12 @@ function start(cards){
     };
     players.numPlayers++;
   }
+
+  function end(cards){
+    for(i = 0; i < 5; i++){
+        delete(cards[i]);
+    }
+  }
   
   function keyDown(keycodeValue){
     keyDownGame(keycodeValue);
@@ -42,4 +48,4 @@ function start(cards){
     cards[i].y = y;
   }
 
-  module.exports = {start, connectPlayer, keyDown, moveCard};
+  module.exports = {start, end, connectPlayer, keyDown, moveCard};
