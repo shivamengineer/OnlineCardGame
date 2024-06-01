@@ -24,7 +24,7 @@ class Card extends Rect {
     renderCard(image){
         ctx2.save();
         ctx2.rotate(this.rotation * degree * 90);
-        var rotateAmount = this.rotation % 4;
+        //var rotateAmount = this.rotation % 4;
         var pos = {};
         /*switch(rotateAmount){
             case 0:
