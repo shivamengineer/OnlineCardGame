@@ -22,10 +22,10 @@ var cardSelected = -1;
 //0 = game, 1 = homescreen, 2 = rules engine
 var currentPage = 0;
 
-var homeScreenRect = new Rect(400, 300, 100, 30, "white");
-homeScreenRect.text = "Home Screen";
-var rulesEngineRect = new Rect(550, 300, 100, 30, "white");
-rulesEngineRect.text = "Rules Engine";
+var button1Rect = new Rect(400, 300, 100, 30, "white");
+button1Rect.text = "Home Screen";
+var button2Rect = new Rect(550, 300, 100, 30, "white");
+button2Rect.text = "Rules Engine";
 const degree = Math.PI / 180;
 
 var rect2 = new Rect(400, 600, 50, 50, "pink");

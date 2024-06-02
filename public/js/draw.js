@@ -6,14 +6,14 @@ function draw() {
     }
 }
 
-function drawHomeScreenButton(){
-    homeScreenRect.render();
-    homeScreenRect.renderText(homeScreenRect.text);
+function drawButton1Rect(){
+    button1Rect.render();
+    button1Rect.renderText(button1Rect.text);
 }
 
-function drawRulesEngineButton(){
-    rulesEngineRect.render();
-    rulesEngineRect.renderText(rulesEngineRect.text);
+function drawButton2Rect(){
+    button2Rect.render();
+    button2Rect.renderText(button2Rect.text);
 }
 
 function clearscreen(){
@@ -44,19 +44,18 @@ function drawMenuOptions(){
 }
 
 function drawGame(){
-    drawHomeScreenButton();
     drawCards();
     drawPlayers();
     drawMenuOptions();
 }
 
-function drawHomeScreen(){
-    
+function drawButtons(){
+    drawButton1Rect();
+    drawButton2Rect();
 }
 
 function drawAlways(){
-    drawHomeScreenButton();
-    drawRulesEngineButton();
+    drawButtons();
     //testing
     rect2.render();
     ctx2.save();
