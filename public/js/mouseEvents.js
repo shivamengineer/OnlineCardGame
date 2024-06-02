@@ -1,21 +1,7 @@
 function mouseDownEvent(e){
-    if(!homescreen){
+    mouseDownAlways(e);
+    if(currentPage == 0){
         mouseDownEventGame(e);
-        mouseDownEventHomescreen(e);
-    } else {
-        mouseDownEventHomescreen(e);
-    }
-}
-
-function mouseMoveEvent(e){
-    if(!homescreen){
-        mouseMoveEventGame(e);
-    }
-}
-
-function mouseUpEvent(e){
-    if(!homescreen){
-        mouseUpEventGame(e);
     }
 }
 
@@ -30,6 +16,49 @@ function mouseDownEventGame(e){
         selectCardOrMenu(mouseX, mouseY);
     }
     draw();
+}
+
+function mouseDownEventHomescreen(e){
+    var mouseX = e.clientX;
+    var mouseY = e.clientY;
+    if(mouseCollides(mouseX, mouseY, homeScreenRect)){
+        switch(currentPage){}
+        if(currentPage == 0){
+            currentPage = 1;
+            homeScreenRect.text = "Home Screen";
+        } else {
+            currentPage = 0;
+            homeScreenRect.text = "Game";
+        }
+        draw();
+    }
+}
+
+function mouseDownEventRulesEngine(e){
+    var mouseX = e.clientX;
+    var mouseY = e.clientY;
+    if(mouseCollides(mouseX, mouseY, rulesEngineRect)){
+        currentPage = 2;
+        homeScreenRect.text = "Home Screen";
+    }
+    draw();
+}
+
+function mouseDownAlways(e){
+    mouseDownEventHomescreen(e);
+    mouseDownEventRulesEngine(e);
+}
+
+function mouseMoveEvent(e){
+    if(!homescreen){
+        mouseMoveEventGame(e);
+    }
+}
+
+function mouseUpEvent(e){
+    if(!homescreen){
+        mouseUpEventGame(e);
+    }
 }
 
 function mouseMoveEventGame(e){
@@ -86,19 +115,5 @@ function selectCardOrMenu(mouseX, mouseY){
                 frontendCards[i].differenceY = mouseY - frontendCards[i].y;
             }
         }
-    }
-}
-
-function mouseDownEventHomescreen(e){
-    var mouseX = e.clientX;
-    var mouseY = e.clientY;
-    if(mouseCollides(mouseX, mouseY, homeScreenRect)){
-        homescreen = !homescreen;
-        if(homescreen){
-            homeScreenRect.text = "Game";
-        } else {
-            homeScreenRect.text = "Home Screen"
-        }
-        draw();
     }
 }
