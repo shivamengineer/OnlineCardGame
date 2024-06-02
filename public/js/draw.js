@@ -1,9 +1,7 @@
 function draw() {
     clearscreen();
     drawAlways();
-    if(homescreen){
-        drawHomeScreenButton();
-    } else {
+    if(currentPage == 0){
         drawGame();
     }
 }
@@ -11,6 +9,11 @@ function draw() {
 function drawHomeScreenButton(){
     homeScreenRect.render();
     homeScreenRect.renderText(homeScreenRect.text);
+}
+
+function drawRulesEngineButton(){
+    rulesEngineRect.render();
+    rulesEngineRect.renderText(rulesEngineRect.text);
 }
 
 function clearscreen(){
@@ -48,10 +51,13 @@ function drawGame(){
 }
 
 function drawHomeScreen(){
-    drawHomeScreenButton();
+    
 }
 
 function drawAlways(){
+    drawHomeScreenButton();
+    drawRulesEngineButton();
+    //testing
     rect2.render();
     ctx2.save();
     ctx2.rotate(degree * 40);
