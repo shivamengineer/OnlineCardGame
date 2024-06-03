@@ -100,14 +100,7 @@ function mouseUpEventGame(e){
 function useMenu(mouseX, mouseY){
     for(const i in menuOptions){
         if(mouseCollides(mouseX, mouseY, menuOptions[i])){
-            if(i == 0){
-                frontendCards[cardSelected].rotation++;
-            } else if(i == 1){
-                frontendCards[cardSelected].rotation--;
-                while(frontendCards[cardSelected].rotation < 0){
-                    frontendCards[cardSelected].rotation += 4;
-                }
-            }
+            socket.emit('rotateCard', i, cardSelected);
         }
     }
 }

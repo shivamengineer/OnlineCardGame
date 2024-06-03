@@ -50,6 +50,11 @@ io.on('connection', (socket) => {
     io.emit('updatePlayers', players, cards);
   });
 
+  socket.on('rotateCard', (i, selectedCard) => {
+    ioEventsLib.rotateCard(i, cards, selectedCard);
+    io.emit('updatePlayers', players, cards);
+  });
+
   //socket.emit for local, io.emit for everyone
   io.emit('updatePlayers', players, cards);
 

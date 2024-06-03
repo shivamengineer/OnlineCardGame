@@ -10,6 +10,7 @@ class Card extends Rect {
         this.y = y;
         this.differenceX = 0;
         this.differenceY = 0;
+        this.rotation = 0;
     }
     
     equal(c) {

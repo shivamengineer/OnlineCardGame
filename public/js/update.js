@@ -30,6 +30,7 @@ function updateCards(backendCards){
         frontendCards[i].x = backendCards[i].x;
         frontendCards[i].y = backendCards[i].y;
       }
+      frontendCards[i].rotation = backendCards[i].rotation;
     }
 }
 

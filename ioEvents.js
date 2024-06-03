@@ -6,7 +6,8 @@ function start(cards){
         visible: true,
         cardID: i,
         x: 20 + (70 * i),
-        y: 150
+        y: 150,
+        rotation: 0
       }
     }
   }
@@ -48,4 +49,12 @@ function start(cards){
     cards[i].y = y;
   }
 
-  module.exports = {start, end, connectPlayer, keyDown, moveCard};
+  function rotateCard(i, cards, selectedCard){
+    if(i == 0){
+      cards[selectedCard].rotation++;
+    } else if(i == 1){
+      cards[selectedCard].rotation--;
+    }
+  }
+
+  module.exports = {start, end, connectPlayer, keyDown, moveCard, rotateCard};
