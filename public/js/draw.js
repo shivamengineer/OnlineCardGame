@@ -3,8 +3,10 @@ function draw() {
     drawAlways();
     if(currentPage == 0){
         drawGame();
-    } else if(currentPage == 2){
+    } else if(currentPage == 1){
         drawTesting();
+    } else if(currentPage == 2){
+        drawRulesEngine();
     }
 }
 
@@ -65,6 +67,11 @@ function drawTesting(){
     var y7 = -(rect2.x * Math.sin(degree * 40)) + (rect2.y * Math.cos(degree * 40));
     ctx2.fillRect(x7, y7, rect2.width, rect2.height);
     ctx2.restore();
+}
+
+function drawRulesEngine(){
+    createRulesPage.render();
+    gamePreviewPage.render();
 }
 
 function drawAlways(){
