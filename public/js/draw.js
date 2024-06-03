@@ -58,7 +58,6 @@ function drawButtons(){
 
 function drawTesting(){
     //testing
-    rect2.render();
     ctx2.save();
     ctx2.rotate(degree * 40);
     ctx2.fillStyle = "green";

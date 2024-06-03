@@ -24,26 +24,7 @@ class Card extends Rect {
     renderCard(image){
         ctx2.save();
         ctx2.rotate(this.rotation * degree * 90);
-        //var rotateAmount = this.rotation % 4;
         var pos = {};
-        /*switch(rotateAmount){
-            case 0:
-                pos[0] = this.x;
-                pos[1] = this.y;
-                break;
-            case 1:
-                pos[0] = this.y;
-                pos[1] = -this.x - image.naturalWidth;
-                break;
-            case 2:
-                pos[0] = -this.x - image.naturalWidth;
-                pos[1] = -this.y - image.naturalHeight;
-                break;
-            case 3:
-                pos[0] = -this.y - image.naturalHeight;
-                pos[1] = this.x
-                break;
-        }*/
         pos[0] = (this.x * Math.cos(this.rotation * degree * 90)) + (this.y * Math.sin(this.rotation * degree * 90));
         pos[1] = -(this.x * Math.sin(this.rotation * degree * 90)) + (this.y * Math.cos(this.rotation * degree * 90));
         ctx2.drawImage(image, pos[0], pos[1]);
