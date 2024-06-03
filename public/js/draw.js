@@ -3,6 +3,8 @@ function draw() {
     drawAlways();
     if(currentPage == 0){
         drawGame();
+    } else if(currentPage == 2){
+        drawTesting();
     }
 }
 
@@ -54,8 +56,7 @@ function drawButtons(){
     drawButton2Rect();
 }
 
-function drawAlways(){
-    drawButtons();
+function drawTesting(){
     //testing
     rect2.render();
     ctx2.save();
@@ -65,4 +66,8 @@ function drawAlways(){
     var y7 = -(rect2.x * Math.sin(degree * 40)) + (rect2.y * Math.cos(degree * 40));
     ctx2.fillRect(x7, y7, rect2.width, rect2.height);
     ctx2.restore();
+}
+
+function drawAlways(){
+    drawButtons(); 
 }
