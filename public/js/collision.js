@@ -9,8 +9,8 @@ function mouseCollides(mouseX, mouseY, obj){
 
 function mouseCollidesCard(mouseX, mouseY, card, img){
     var collides = false;
-    if(mouseX > card.x && mouseX < card.x + img.naturalWidth &&
-        mouseY > card.y && mouseY < card.y + img.naturalHeight){
+    if(mouseX > card.x - (img.naturalWidth / 2) && mouseX < card.x + (img.naturalWidth / 2) &&
+        mouseY > card.y - (img.naturalHeight / 2) && mouseY < card.y + (img.naturalHeight / 2)){
             collides = true;
         }
     return collides;
