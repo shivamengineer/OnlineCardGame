@@ -6,10 +6,13 @@ class Card extends Rect {
         this.visible = visibility;
         this.deckID = ID;
         this.moving = false;
+        this.rotating = false;
         this.x = x;
         this.y = y;
         this.differenceX = 0;
         this.differenceY = 0;
+        this.startX = 0;
+        this.startY = 0;
         this.rotation = 0;
     }
     
@@ -24,10 +27,11 @@ class Card extends Rect {
 
     renderCard(image){
         ctx2.save();
-        ctx2.rotate(this.rotation * degree * 90);
+        // this.rotation * degree * 90
+        ctx2.rotate(this.rotation);
         var pos = {};
-        pos[0] = (this.x * Math.cos(this.rotation * degree * 90)) + (this.y * Math.sin(this.rotation * degree * 90)) - (image.naturalWidth / 2);
-        pos[1] = -(this.x * Math.sin(this.rotation * degree * 90)) + (this.y * Math.cos(this.rotation * degree * 90)) - (image.naturalHeight / 2);
+        pos[0] = (this.x * Math.cos(this.rotation)) + (this.y * Math.sin(this.rotation)) - (image.naturalWidth / 2);
+        pos[1] = -(this.x * Math.sin(this.rotation)) + (this.y * Math.cos(this.rotation)) - (image.naturalHeight / 2);
         ctx2.drawImage(image, pos[0], pos[1]);
         ctx2.restore();
     }
