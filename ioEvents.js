@@ -49,12 +49,4 @@ function start(cards){
     cards[i].y = y;
   }
 
-  function rotateCard(i, cards, selectedCard){
-    if(i == 0){
-      cards[selectedCard].rotation++;
-    } else if(i == 1){
-      cards[selectedCard].rotation--;
-    }
-  }
-
-  module.exports = {start, end, connectPlayer, keyDown, moveCard, rotateCard};
+  module.exports = {start, end, connectPlayer, keyDown, moveCard};

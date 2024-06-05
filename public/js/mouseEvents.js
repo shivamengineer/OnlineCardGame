@@ -105,19 +105,11 @@ function mouseUpEventGame(e){
         if(frontendCards[i].rotating){
             var mouseX = e.clientX - frontendCards[i].startX;
             var mouseY = e.clientY - frontendCards[i].startY;
-            socket.emit('mouseup2', i, mouseX, mouseY);
+            socket.emit('rotateCard', i, mouseX, mouseY);
             frontendCards[i].rotating = false;
         }
     }
     draw();
-}
-
-function useMenu(mouseX, mouseY){
-    for(const i in menuOptions){
-        if(mouseCollides(mouseX, mouseY, menuOptions[i])){
-            socket.emit('rotateCard', i, cardSelected);
-        }
-    }
 }
 
 function mouseDownRotate(mouseX, mouseY){

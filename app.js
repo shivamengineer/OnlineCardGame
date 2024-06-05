@@ -21,41 +21,42 @@ const cards = {};
 players.numPlayers = 0;
 var started = false;
 
+//checks events whenever any event is sent to server
 io.on('connection', (socket) => {
 
-  console.log('a user connected');
-
+  //creates 5 cards if the first player connects
   if(!started){
     ioEventsLib.start(cards);
     started = true;
   }
 
+  //connects player
   ioEventsLib.connectPlayer(socket.id, players);
 
+  //disconnects player
   socket.on('disconnect', (reason) => {
     disconnectPlayer(socket.id);
   });
 
+  //updates based on keydown events
   socket.on('keydown', (keycode) => {
     ioEventsLib.keyDown(keycode);
   });
 
+  //updates based on the mouse moving
   socket.on('mousemove', (mouseX, mouseY, i) => {
     ioEventsLib.moveCard(mouseX, mouseY, i, cards);
     io.emit('updatePlayers', players, cards);
   });
 
+  //updates from mouseUp event for moving cards
   socket.on('mouseup', (mouseX, mouseY, i) => {
     ioEventsLib.moveCard(mouseX, mouseY, i, cards);
     io.emit('updatePlayers', players, cards);
   });
 
-  socket.on('rotateCard', (i, selectedCard) => {
-    ioEventsLib.rotateCard(i, cards, selectedCard);
-    io.emit('updatePlayers', players, cards);
-  });
-
-  socket.on('mouseup2', (i, deltaX, deltaY) => {
+  //updates from mouseUp event for rotating cards
+  socket.on('rotateCard', (i, deltaX, deltaY) => {
     cards[i].rotation = Math.atan(deltaY / deltaX);
     io.emit('updatePlayers', players, cards);
   });
@@ -65,10 +66,12 @@ io.on('connection', (socket) => {
 
 });
 
+//starts server
 server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
+//function to disconnect player
 function disconnectPlayer(socketID){
   delete players[socketID];
   players.numPlayers--;
