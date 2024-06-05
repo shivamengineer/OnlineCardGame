@@ -10,22 +10,9 @@ function mouseDownEventGame(e){
     var mouseY = e.clientY;
 
     if(shift){
-        for(const i in frontendCards){
-            if(mouseCollidesCard(mouseX, mouseY, frontendCards[i], img)){
-                cardRotating = true;
-                frontendCards[i].rotating = true;
-                frontendCards[i].startX = mouseX;
-                frontendCards[i].startY = mouseY;
-            }
-        }
+        mouseDownRotate(mouseX, mouseY);
     } else {
-        for(const i in frontendCards){
-            if(mouseCollidesCard(mouseX, mouseY, frontendCards[i], img)){
-                frontendCards[i].moving = true;
-                frontendCards[i].differenceX = mouseX - frontendCards[i].x;
-                frontendCards[i].differenceY = mouseY - frontendCards[i].y;
-            }
-        }
+        mouseDownMove(mouseX, mouseY);
     }
 
     draw();
@@ -133,21 +120,23 @@ function useMenu(mouseX, mouseY){
     }
 }
 
-function selectCardOrMenu(mouseX, mouseY){
+function mouseDownRotate(mouseX, mouseY){
     for(const i in frontendCards){
         if(mouseCollidesCard(mouseX, mouseY, frontendCards[i], img)){
-            if(shift){
-                cardMenuOpen = true;
-                cardSelected = i;
-                for(j = 0; j < 2; j++){
-                    menuOptions[j].x = mouseX;
-                    menuOptions[j].y = mouseY + (j * 22);
-                }
-            } else {
-                frontendCards[i].moving = true;
-                frontendCards[i].differenceX = mouseX - frontendCards[i].x;
-                frontendCards[i].differenceY = mouseY - frontendCards[i].y;
-            }
+            cardRotating = true;
+            frontendCards[i].rotating = true;
+            frontendCards[i].startX = mouseX;
+            frontendCards[i].startY = mouseY;
+        }
+    }
+}
+
+function mouseDownMove(mouseX, mouseY){
+    for(const i in frontendCards){
+        if(mouseCollidesCard(mouseX, mouseY, frontendCards[i], img)){
+            frontendCards[i].moving = true;
+            frontendCards[i].differenceX = mouseX - frontendCards[i].x;
+            frontendCards[i].differenceY = mouseY - frontendCards[i].y;
         }
     }
 }
