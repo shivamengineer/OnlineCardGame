@@ -55,6 +55,11 @@ io.on('connection', (socket) => {
     io.emit('updatePlayers', players, cards);
   });
 
+  socket.on('mouseup2', (i, deltaX, deltaY) => {
+    cards[i].rotation = Math.atan(deltaY / deltaX);
+    io.emit('updatePlayers', players, cards);
+  });
+
   //socket.emit for local, io.emit for everyone
   io.emit('updatePlayers', players, cards);
 

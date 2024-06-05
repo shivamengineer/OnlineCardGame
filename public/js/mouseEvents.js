@@ -9,12 +9,25 @@ function mouseDownEventGame(e){
     var mouseX = e.clientX;
     var mouseY = e.clientY;
 
-    if(cardMenuOpen){
-        useMenu(mouseX, mouseY);
-        cardMenuOpen = false;
+    if(shift){
+        for(const i in frontendCards){
+            if(mouseCollidesCard(mouseX, mouseY, frontendCards[i], img)){
+                cardRotating = true;
+                frontendCards[i].rotating = true;
+                frontendCards[i].startX = mouseX;
+                frontendCards[i].startY = mouseY;
+            }
+        }
     } else {
-        selectCardOrMenu(mouseX, mouseY);
+        for(const i in frontendCards){
+            if(mouseCollidesCard(mouseX, mouseY, frontendCards[i], img)){
+                frontendCards[i].moving = true;
+                frontendCards[i].differenceX = mouseX - frontendCards[i].x;
+                frontendCards[i].differenceY = mouseY - frontendCards[i].y;
+            }
+        }
     }
+
     draw();
 }
 
@@ -66,6 +79,15 @@ function mouseMoveEvent(e){
     if(currentPage == 0){
         mouseMoveEventGame(e);
     }
+    if(currentPage == 0 && cardRotating){
+        for(const i in frontendCards){
+            if(frontendCards[i].rotating){
+                var deltaX = e.clientX - frontendCards[i].startX;
+                var deltaY = e.clientY - frontendCards[i].startY;
+                frontendCards[i].rotation = Math.atan(deltaY / deltaX);
+            }
+        }
+    }
 }
 
 function mouseUpEvent(e){
@@ -92,6 +114,12 @@ function mouseUpEventGame(e){
             var mouseY = e.clientY - frontendCards[i].differenceY;
             socket.emit('mouseup', mouseX, mouseY, i);
             frontendCards[i].moving = false;
+        }
+        if(frontendCards[i].rotating){
+            var mouseX = e.clientX - frontendCards[i].startX;
+            var mouseY = e.clientY - frontendCards[i].startY;
+            socket.emit('mouseup2', i, mouseX, mouseY);
+            frontendCards[i].rotating = false;
         }
     }
     draw();

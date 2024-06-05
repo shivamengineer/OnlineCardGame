@@ -18,6 +18,7 @@ var cardMenuOpen = false;
 var shift = false;
 var numPlayers = 0;
 var cardSelected = -1;
+var cardRotating = false;
 
 //0 = game, 1 = homescreen, 2 = rules engine
 var currentPage = 0;
