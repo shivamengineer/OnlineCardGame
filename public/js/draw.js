@@ -7,22 +7,17 @@ function draw() {
         drawTesting();
     } else if(currentPage == 2){
         drawRulesEngine();
+        drawCodeBlocks();
     }
-}
-
-function drawButton1Rect(){
-    button1Rect.render();
-    button1Rect.renderText(button1Rect.text);
-}
-
-function drawButton2Rect(){
-    button2Rect.render();
-    button2Rect.renderText(button2Rect.text);
 }
 
 function clearscreen(){
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function drawAlways(){
+    drawButtons(); 
 }
 
 function drawCards(){
@@ -72,8 +67,27 @@ function drawTesting(){
 function drawRulesEngine(){
     createRulesPage.render();
     gamePreviewPage.render();
+    drawWhileBlock();
 }
 
-function drawAlways(){
-    drawButtons(); 
+function drawButton1Rect(){
+    button1Rect.render();
+    button1Rect.renderText(button1Rect.text);
+}
+
+function drawButton2Rect(){
+    button2Rect.render();
+    button2Rect.renderText(button2Rect.text);
+}
+
+function drawWhileBlock(){
+    whileBlock.render();
+    whileBlock.renderText(whileBlock.text);
+}
+
+function drawCodeBlocks(){
+    for(const i in codeBlocks){
+        codeBlocks[i].render();
+        codeBlocks[i].renderText(codeBlocks[i].text);
+    }
 }
