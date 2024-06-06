@@ -2,7 +2,13 @@ function mouseDownEvent(e){
     mouseDownAlways(e);
     if(currentPage == 0){
         mouseDownEventGame(e);
+    } else if(currentPage == 2){
+        mouseDownMoveBlock(e.clientX, e.clientY);
     }
+}
+
+function mouseDownAlways(e){
+    mouseDownEventButtons(e);
 }
 
 function mouseDownEventGame(e){
@@ -58,28 +64,28 @@ function mouseDownEventButtons(e){
     }
 }
 
-function mouseDownAlways(e){
-    mouseDownEventButtons(e);
-}
-
 function mouseMoveEvent(e){
     if(currentPage == 0){
         mouseMoveEventGame(e);
-    }
-    if(currentPage == 0 && cardRotating){
-        for(const i in frontendCards){
-            if(frontendCards[i].rotating){
-                var deltaX = e.clientX - frontendCards[i].startX;
-                var deltaY = e.clientY - frontendCards[i].startY;
-                frontendCards[i].rotation = Math.atan(deltaY / deltaX);
+        if(cardRotating){
+            for(const i in frontendCards){
+                if(frontendCards[i].rotating){
+                    var deltaX = e.clientX - frontendCards[i].startX;
+                    var deltaY = e.clientY - frontendCards[i].startY;
+                    frontendCards[i].rotation = Math.atan(deltaY / deltaX);
+                }
             }
         }
+    } else if(currentPage == 2){
+        mouseMoveRulesBlock(e);
     }
 }
 
 function mouseUpEvent(e){
     if(currentPage == 0){
         mouseUpEventGame(e);
+    } else if(currentPage == 2){
+        mouseUpRulesBlock(e);
     }
 }
 
@@ -131,4 +137,40 @@ function mouseDownMove(mouseX, mouseY){
             frontendCards[i].differenceY = mouseY - frontendCards[i].y;
         }
     }
+}
+
+function mouseDownMoveBlock(mouseX, mouseY){
+    if(mouseCollides(mouseX, mouseY, whileBlock)){
+        var tempBlock = new Rect(whileBlock.x, whileBlock.y, whileBlock.width, whileBlock.height, whileBlock.color);
+        tempBlock.text = whileBlock.text;
+        tempBlock.moving = true;
+        tempBlock.differenceX = mouseX - tempBlock.x;
+        tempBlock.differenceY = mouseY - tempBlock.y;
+        codeBlocks.push(tempBlock);
+    }
+}
+
+function mouseMoveRulesBlock(e){
+    for(const i in codeBlocks){
+        if(codeBlocks[i].moving){
+            var mouseX = e.clientX - codeBlocks[i].differenceX;
+            var mouseY = e.clientY - codeBlocks[i].differenceY;
+            codeBlocks[i].x = mouseX;
+            codeBlocks[i].y = mouseY;
+        }
+    }
+    draw();
+}
+
+function mouseUpRulesBlock(e){
+    for(const i in codeBlocks){
+        if(codeBlocks[i].moving){
+            var mouseX = e.clientX - codeBlocks[i].differenceX;
+            var mouseY = e.clientY - codeBlocks[i].differenceY;
+            codeBlocks[i].x = mouseX;
+            codeBlocks[i].y = mouseY;
+            codeBlocks[i].moving = false;
+        }
+    }
+    draw();
 }
