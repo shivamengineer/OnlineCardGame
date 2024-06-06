@@ -33,6 +33,10 @@ var rect2 = new Rect(400, 300, 50, 50, "pink");
 
 var createRulesPage = new Rect(250, 50, 500, 400, "white");
 var gamePreviewPage = new Rect(800, 50, 500, 400, "white");
+var whileBlock = new Rect(100, 80, 100, 30, "red");
+whileBlock.text = "while";
+
+var codeBlocks = [];
 
 for(i = 0; i < 2; i++){
   menuOptions[i] = new Rect(0, 0, menuAttribs[2], menuAttribs[3], menuAttribs[4]);
