@@ -68,6 +68,7 @@ function drawRulesEngine(){
     createRulesPage.render();
     gamePreviewPage.render();
     drawWhileBlock();
+    drawForBlock();
 }
 
 function drawButton1Rect(){
@@ -83,6 +84,11 @@ function drawButton2Rect(){
 function drawWhileBlock(){
     whileBlock.render();
     whileBlock.renderText(whileBlock.text);
+}
+
+function drawForBlock(){
+    forBlock.render();
+    forBlock.renderText(forBlock.text);
 }
 
 function drawCodeBlocks(){
