@@ -5,8 +5,8 @@ function start(cards){
         suit: 2,
         visible: true,
         cardID: i,
-        x: 20 + (70 * i),
-        y: 150,
+        x: 50 + (100 * i),
+        y: 200,
         rotation: 0
       }
     }
