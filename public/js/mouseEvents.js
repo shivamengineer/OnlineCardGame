@@ -147,6 +147,21 @@ function mouseDownMoveBlock(mouseX, mouseY){
         tempBlock.differenceX = mouseX - tempBlock.x;
         tempBlock.differenceY = mouseY - tempBlock.y;
         codeBlocks.push(tempBlock);
+    } else if(mouseCollides(mouseX, mouseY, forBlock)){
+        var tempBlock = new Rect(forBlock.x, forBlock.y, forBlock.width, forBlock.height, forBlock.color);
+        tempBlock.text = forBlock.text;
+        tempBlock.moving = true;
+        tempBlock.differenceX = mouseX - tempBlock.x;
+        tempBlock.differenceY = mouseY - tempBlock.y;
+        codeBlocks.push(tempBlock);
+    } else {
+        for(const i in codeBlocks){
+            if(mouseCollides(mouseX, mouseY, codeBlocks[i])){
+                codeBlocks[i].moving = true;
+                codeBlocks[i].differenceX = mouseX - codeBlocks[i].x;
+                codeBlocks[i].differenceY = mouseY - codeBlocks[i].y;
+            }
+        }
     }
 }
 
@@ -170,6 +185,9 @@ function mouseUpRulesBlock(e){
             codeBlocks[i].x = mouseX;
             codeBlocks[i].y = mouseY;
             codeBlocks[i].moving = false;
+            if(!collides(codeBlocks[i], createRulesPage)){
+                delete codeBlocks[i];
+            }
         }
     }
     draw();
