@@ -44,6 +44,13 @@ function mouseUpRulesBlock(e){
             codeBlocks[i].x = mouseX;
             codeBlocks[i].y = mouseY;
             codeBlocks[i].moving = false;
+            for(const j in codeBlocks){
+                if(j != i && objCollidesBelow(codeBlocks[i], codeBlocks[j])){
+                    codeBlocks[i].x = codeBlocks[j].x;
+                    codeBlocks[i].y = codeBlocks[j].y + codeBlocks[j].height;
+                    console.log("collides below");
+                }
+            }
             if(!collides(codeBlocks[i], createRulesPage)){
                 delete codeBlocks[i];
             }
