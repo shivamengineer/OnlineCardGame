@@ -92,8 +92,7 @@ function drawForBlock(){
 }
 
 function drawCodeBlocks(){
-    for(const i in codeBlocks){
-        codeBlocks[i].render();
-        codeBlocks[i].renderText(codeBlocks[i].text);
+    for(const i in allBlocks){
+        allBlocks[i].renderCodeBlock();
     }
 }
