@@ -39,7 +39,7 @@ whileBlock.text = "while";
 var forBlock = new Rect(100, 150, 80, 30, "red");
 forBlock.text = "for";
 
-var codeBlocks = [];
+var allBlocks = [];
 
 for(i = 0; i < 2; i++){
   menuOptions[i] = new Rect(0, 0, menuAttribs[2], menuAttribs[3], menuAttribs[4]);
