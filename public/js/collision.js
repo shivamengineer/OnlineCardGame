@@ -11,7 +11,7 @@ function collides(obj, obj2){
 
 function objCollidesBelow(obj, obj2){
     var collides = false;
-    if(obj.x + obj.width > obj2.x &&
+    if(obj != null && obj.x + obj.width > obj2.x &&
         obj.x < obj2.x + obj2.width &&
         obj.y + obj.height > obj2.y + (obj2.height / 2) &&
         obj.y < obj2.y + obj2.height){
