@@ -55,6 +55,9 @@ function mouseUpRulesBlock(e){
             if(added){
                 delete allBlocks[i];
             }
+            if(!collides(allBlocks[i].blocks[0], createRulesPage)){
+                delete(allBlocks[i]);
+            }
         }
     }
     draw();
