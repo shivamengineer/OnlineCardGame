@@ -1,7 +1,8 @@
 class Deck{
-    constructor() {
+    constructor(ID) {
         this.length = 0;
-        this.deck = [];
+        this.deck = {};
+        this.dID = ID;
     }
 
     add(card, pos){
@@ -111,3 +112,5 @@ class Deck{
 
 
 }
+
+module.exports = {Deck};
