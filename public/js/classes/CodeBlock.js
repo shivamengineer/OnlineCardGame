@@ -13,12 +13,9 @@ class CodeBlock {
                     tempBlocks.push(this.blocks.pop());
                 }
                 while(block1.blocks != -null){
-                    //block1.blocks[0].x = this.blocks[0].x;
-                    //block1.blocks[0].y = this.blocks[0].y + (this.height * this.blocks.length);
                     this.blocks.push(block1.blocks.shift());
                 }
                 while(tempBlocks != -null){
-                    //tempBlocks[tempBlocks.length - 1].y = this.blocks[0].y + (this.height + this.blocks.length);
                     this.blocks.push(tempBlocks.pop()); 
                 }
                 this.moveWholeBlock(this.blocks[0].x, this.blocks[0].y);
