@@ -45,12 +45,10 @@ function mouseUpRulesBlock(e){
             allBlocks[i].moveWholeBlock(mouseX, mouseY);
             allBlocks[i].moving = false;
             var added = false;
-            for(const j in allBlocks){
-                if(i != j){
-                    var temp = allBlocks[j].combineBlock(allBlocks[i]);
-                    if(temp){
-                        added = temp;
-                        allBlocks[j].moveWholeBlock(mouseX, mouseY);
+            if(!added){
+                for(const j in allBlocks){
+                    if(i != j){
+                        allBlocks[j].combineBlock(allBlocks[i]);
                     }
                 }
             }

@@ -38,8 +38,14 @@ var whileBlock = new Rect(100, 80, 80, 30, "red");
 whileBlock.text = "while";
 var forBlock = new Rect(100, 150, 80, 30, "red");
 forBlock.text = "for";
+var startRect = new Rect(255, 55, 80, 30, "blue");
+startRect.text = "start";
+var startBlock = new CodeBlock(startRect);
 
 var allBlocks = [];
+var immovableBlocks = [];
+
+immovableBlocks.push(startBlock);
 
 for(i = 0; i < 2; i++){
   menuOptions[i] = new Rect(0, 0, menuAttribs[2], menuAttribs[3], menuAttribs[4]);

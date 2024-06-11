@@ -95,4 +95,7 @@ function drawCodeBlocks(){
     for(const i in allBlocks){
         allBlocks[i].renderCodeBlock();
     }
+    for(const i in immovableBlocks){
+        immovableBlocks[i].renderCodeBlock();
+    }
 }
