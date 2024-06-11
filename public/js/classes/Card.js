@@ -1,6 +1,6 @@
-class Card extends Rect {
+class Card {
     constructor(cardValue, cardSuit, visibility, ID, x, y){
-        super();
+        
         this.value = cardValue;
         this.suit = cardSuit;
         this.visible = visibility;
@@ -23,6 +23,10 @@ class Card extends Rect {
             return false;
         } 
         return true;
+    }
+
+    pic() {
+        return this.value + this.suit;
     }
 
     renderCard(image){

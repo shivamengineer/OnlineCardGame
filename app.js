@@ -1,6 +1,6 @@
 const ioEventsLib = require('./ioEvents');
-const ex = require('./Card2');
-const deckA = require('./Deck');
+const deckA = require('./public/js/classes/Deck');
+const cardClass = require('./public/js/classes/Card');
 const express = require('express');
 const app = express();
 
@@ -20,8 +20,7 @@ app.get('/', (req, res) => {
 
 const players = {};
 const deck = new deckA.Deck(0);
-var card2 = new ex.Card2();
-console.log(card2);
+console.log(deck);
 const cards = {};
 players.numPlayers = 0;
 var started = false;
