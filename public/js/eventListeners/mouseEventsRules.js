@@ -45,6 +45,11 @@ function mouseUpRulesBlock(e){
             allBlocks[i].moveWholeBlock(mouseX, mouseY);
             allBlocks[i].moving = false;
             var added = false;
+            for(const j in immovableBlocks){
+                if(immovableBlocks[j].combineBlock(allBlocks[i])){
+                    added = true;
+                }
+            }
             if(!added){
                 for(const j in allBlocks){
                     if(i != j){
