@@ -69,6 +69,7 @@ function drawRulesEngine(){
     gamePreviewPage.render();
     drawWhileBlock();
     drawForBlock();
+    drawBreakContinueRects();
 }
 
 function drawButton1Rect(){
@@ -91,11 +92,25 @@ function drawForBlock(){
     forBlock.renderText(forBlock.text);
 }
 
+function drawBreakContinueRects(){
+    breakRect.render();
+    breakRect.renderText(breakRect.text);
+    continueRect.render();
+    continueRect.renderText(continueRect.text);
+}
+
 function drawCodeBlocks(){
+    var temp = -1;
     for(const i in allBlocks){
         allBlocks[i].renderCodeBlock();
+        if(allBlocks[i].moving){
+            temp = i;
+        }
     }
     for(const i in immovableBlocks){
         immovableBlocks[i].renderCodeBlock();
+    }
+    if(temp != -1){
+        allBlocks[temp].renderCodeBlock();
     }
 }
