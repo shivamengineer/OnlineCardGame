@@ -1,27 +1,34 @@
 function mouseDownMoveBlock(mouseX, mouseY){
-    if(mouseCollides(mouseX, mouseY, whileBlock)){
-        var tempRect = new Rect(whileBlock.x, whileBlock.y, whileBlock.width, whileBlock.height, whileBlock.color);
-        tempRect.text = whileBlock.text;
-        var tempBlock = new CodeBlock(tempRect);
-        tempBlock.moving = true;
-        tempBlock.differenceX = mouseX - tempRect.x;
-        tempBlock.differenceY = mouseY - tempRect.y;
-        allBlocks.push(tempBlock);
-    } else if(mouseCollides(mouseX, mouseY, forBlock)){
-        var tempRect = new Rect(forBlock.x, forBlock.y, forBlock.width, forBlock.height, forBlock.color);
-        tempRect.text = forBlock.text;
-        var tempBlock = new CodeBlock(tempRect);
-        tempBlock.moving = true;
-        tempBlock.differenceX = mouseX - tempRect.x;
-        tempBlock.differenceY = mouseY - tempRect.y;
-        allBlocks.push(tempBlock);
-    } else {
-        for(const i in allBlocks){
-            if(allBlocks[i].mouseCollidesBlock(mouseX, mouseY)){
-                allBlocks[i].moving = true;
-                allBlocks[i].differenceX = mouseX - allBlocks[i].x;
-                allBlocks[i].differenceY = mouseY - allBlocks[i].y;
-            }
+    for(const i in createBlocks){
+        if(mouseCollides(mouseX, mouseY, createBlocks[i])){
+            var tempRect = new Rect(createBlocks[i].x, createBlocks[i].y, createBlocks[i].width, createBlocks[i].height, createBlocks[i].color);
+            tempRect.text = createBlocks[i].text;
+            var tempBlock = new CodeBlock(tempRect);
+            tempBlock.moving = true;
+            tempBlock.differenceX = mouseX - tempRect.x;
+            tempBlock.differenceY = mouseY - tempRect.y;
+            allBlocks.push(tempBlock);
+        }
+    }
+    for(const i in createBreakContinueBlocks){
+        if(mouseCollides(mouseX, mouseY, createBreakContinueBlocks[i])){
+            var tempBreakRect = new Rect(breakRect.x, breakRect.y, breakRect.width, breakRect.height, breakRect.color);
+            tempBreakRect.text = breakRect.text;
+            var tempContinueRect = new Rect(continueRect.x, continueRect.y, continueRect.width, continueRect.height, continueRect.color);
+            tempContinueRect.text = continueRect.text;
+            var tempBlock = new CodeBlock(tempBreakRect);
+            tempBlock.blocks.push(tempContinueRect);
+            tempBlock.moving = true;
+            tempBlock.differenceX = mouseX - createBreakContinueBlocks[i].x;
+            tempBlock.differenceY = mouseY - createBreakContinueBlocks[i].y;
+            allBlocks.push(tempBlock);
+        }
+    }
+    for(const i in allBlocks){
+        if(allBlocks[i].mouseCollidesBlock(mouseX, mouseY)){
+            allBlocks[i].moving = true;
+            allBlocks[i].differenceX = mouseX - allBlocks[i].x;
+            allBlocks[i].differenceY = mouseY - allBlocks[i].y;
         }
     }
 }
