@@ -41,10 +41,20 @@ forBlock.text = "for";
 var startRect = new Rect(255, 55, 80, 30, "blue");
 startRect.text = "start";
 var startBlock = new CodeBlock(startRect);
+var breakRect = new Rect(100, 220, 80, 30, "blue");
+breakRect.text = "break";
+var continueRect = new Rect(100, 250, 80, 30, "blue");
+continueRect.text = "continue";
 
+var createBlocks = [];
+var createBreakContinueBlocks = [];
 var allBlocks = [];
 var immovableBlocks = [];
 
+createBlocks.push(whileBlock);
+createBlocks.push(forBlock);
+createBreakContinueBlocks.push(breakRect);
+createBreakContinueBlocks.push(continueRect);
 immovableBlocks.push(startBlock);
 
 for(i = 0; i < 2; i++){
