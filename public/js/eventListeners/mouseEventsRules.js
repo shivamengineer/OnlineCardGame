@@ -25,10 +25,26 @@ function mouseDownMoveBlock(mouseX, mouseY){
         }
     }
     for(const i in allBlocks){
-        if(allBlocks[i].mouseCollidesBlock(mouseX, mouseY)){
+        if(mouseCollides(mouseX, mouseY, allBlocks[i].blocks[0])){
             allBlocks[i].moving = true;
-            allBlocks[i].differenceX = mouseX - allBlocks[i].x;
-            allBlocks[i].differenceY = mouseY - allBlocks[i].y;
+            allBlocks[i].differenceX = mouseX - allBlocks[i].blocks[0].x;
+            allBlocks[i].differenceY = mouseY - allBlocks[i].blocks[0].y;
+        } else if(allBlocks[i].blocks.length > 1){
+            var index = allBlocks[i].mouseCollidesBlock(mouseX, mouseY);
+            if(index != -1){
+                var temp = [];
+                while(allBlocks[i].blocks.length > index + 1){
+                    temp.push(allBlocks[i].blocks.pop());
+                }
+                var tempBlock = new CodeBlock(allBlocks[i].blocks.pop());
+                while(temp != -null){
+                    tempBlock.blocks.push(temp.pop());
+                }
+                tempBlock.moving = true;
+                tempBlock.differenceX = mouseX - tempBlock.x;
+                tempBlock.differenceY = mouseY - tempBlock.y;
+                allBlocks.push(tempBlock);
+            }
         }
     }
 }
@@ -60,15 +76,21 @@ function mouseUpRulesBlock(e){
             if(!added){
                 for(const j in allBlocks){
                     if(i != j){
-                        allBlocks[j].combineBlock(allBlocks[i]);
+                        if(allBlocks[j].combineBlock(allBlocks[i])){
+                            added = true;
+                        }
                     }
                 }
             }
-            if(added){
-                delete allBlocks[i];
-            }
-            if(!collides(allBlocks[i].blocks[0], createRulesPage)){
-                delete(allBlocks[i]);
+            if(added || !collides(allBlocks[i].blocks[0], createRulesPage)){
+                var temp = [];
+                while(allBlocks.length > i + 1){
+                    temp.push(allBlocks.pop());
+                }
+                allBlocks.pop();
+                while(temp != -null){
+                    allBlocks.push(temp.pop());
+                }
             }
         }
     }
