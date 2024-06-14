@@ -47,6 +47,25 @@ function mouseDownMoveBlock(mouseX, mouseY){
             }
         }
     }
+    for(const i in immovableBlocks){
+        if(immovableBlocks[i].blocks.length > 1){
+            var index = immovableBlocks[i].mouseCollidesBlock(mouseX, mouseY);
+            if(index != -1){
+                var temp = [];
+                while(immovableBlocks[i].blocks.length > index + 1){
+                    temp.push(immovableBlocks[i].blocks.pop());
+                }
+                var tempBlock = new CodeBlock(immovableBlocks[i].blocks.pop());
+                while(temp != -null){
+                    tempBlock.blocks.push(temp.pop());
+                }
+                tempBlock.moving = true;
+                tempBlock.differenceX = mouseX - tempBlock.x;
+                tempBlock.differenceY = mouseY - tempBlock.y;
+                allBlocks.push(tempBlock);
+            }
+        }
+    }
 }
 
 function mouseMoveRulesBlock(e){
