@@ -30,8 +30,13 @@ function createBlocksFromRect(mouseX, mouseY){
         if(mouseCollides(mouseX, mouseY, createBreakContinueBlocks[i])){
             var tempBreakRect = new Rect(breakRect.x, breakRect.y, breakRect.width, breakRect.height, breakRect.color);
             tempBreakRect.text = breakRect.text;
+            tempBreakRect.gotoType = true;
+            tempBreakRect.count = gotoBlocksCount;
             var tempContinueRect = new Rect(continueRect.x, continueRect.y, continueRect.width, continueRect.height, continueRect.color);
             tempContinueRect.text = continueRect.text;
+            tempContinueRect.gotoType = true;
+            tempContinueRect.count = gotoBlocksCount;
+            gotoBlocksCount++;
             var tempBlock = new CodeBlock(tempBreakRect);
             tempBlock.blocks.push(tempContinueRect);
             tempBlock.moving = true;
@@ -127,9 +132,64 @@ function stopMovingBlock(e){
                 while(allBlocks.length > i + 1){
                     temp.push(allBlocks.pop());
                 }
-                allBlocks.pop();
+                var temp2 = allBlocks.pop();
                 while(temp != -null){
                     allBlocks.push(temp.pop());
+                }
+                
+                for(j = 0; j < temp2.blocks.length; j++){
+                    if(temp2.blocks[j].gotoType){
+                        console.log(temp2.blocks[j].count);
+                        if(removedGotoSet.has(temp2.blocks[j].count)){
+                            removedGotoSet.delete(temp2.blocks[j].count);
+                        } else {
+                            removedGotoSet.add(temp2.blocks[j].count);
+                        }
+                    }
+                }
+                while(removedGotoSet.size > 0){
+                    for(const i in allBlocks){
+                        for(j = 0; j < allBlocks[i].blocks.length; j++){
+                            if(allBlocks[i].blocks[j].gotoType && removedGotoSet.has(allBlocks[i].blocks[j].count)){
+                                console.log("remove");
+                                var temp = [];
+                                while(allBlocks[i].blocks.length > j + 1){
+                                    temp.push(allBlocks[i].blocks.pop());
+                                }
+                                allBlocks[i].blocks.pop();
+                                while(temp != -null){
+                                    allBlocks[i].blocks.push(temp.pop());
+                                }
+                                if(allBlocks[i].blocks.length == 0){
+                                    var tempBlocks = [];
+                                    while(allBlocks.length > i + 1){
+                                        tempBlocks.push(allBlocks.pop());
+                                    }
+                                    allBlocks.pop();
+                                    while(tempBlocks != -null){
+                                        allBlocks.push(tempBlocks.pop());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+function removeGotoBlocks(removeSet){
+    for(const i in allBlocks && removeSet.size > 0){
+        for(j = 0; j < allBlocks[i].blocks.length; j++){
+            if(allBlocks[i].blocks[j].gotoType && removeSet.has(allBlocks[i].blocks[j].count)){
+                var temp = [];
+                while(allBlocks[i].blocks.length > j + 1){
+                    temp.push(allBlocks[i].blocks.pop());
+                }
+                allBlocks[i].blocks.pop();
+                while(temp != -null){
+                    allBlocks[i].blocks.push(temp.pop());
                 }
             }
         }
