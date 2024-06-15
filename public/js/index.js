@@ -51,6 +51,9 @@ var createBreakContinueBlocks = [];
 var allBlocks = [];
 var immovableBlocks = [];
 
+var removedGotoSet = new Set();
+var gotoBlocksCount = 1;
+
 createBlocks.push(whileBlock);
 createBlocks.push(forBlock);
 createBreakContinueBlocks.push(breakRect);
