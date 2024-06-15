@@ -1,4 +1,20 @@
 function mouseDownMoveBlock(mouseX, mouseY){
+    createBlocksFromRect(mouseX, mouseY);
+    moveBlock(mouseX, mouseY);
+    moveFromImmovableBlock(mouseX, mouseY);
+}
+
+function mouseMoveRulesBlock(e){
+    keepMovingBlock(e);
+    draw();
+}
+
+function mouseUpRulesBlock(e){
+    stopMovingBlock(e);
+    draw();
+}
+
+function createBlocksFromRect(mouseX, mouseY){
     for(const i in createBlocks){
         if(mouseCollides(mouseX, mouseY, createBlocks[i])){
             var tempRect = new Rect(createBlocks[i].x, createBlocks[i].y, createBlocks[i].width, createBlocks[i].height, createBlocks[i].color);
@@ -24,6 +40,9 @@ function mouseDownMoveBlock(mouseX, mouseY){
             allBlocks.push(tempBlock);
         }
     }
+}
+
+function moveBlock(mouseX, mouseY){
     for(const i in allBlocks){
         if(mouseCollides(mouseX, mouseY, allBlocks[i].blocks[0])){
             allBlocks[i].moving = true;
@@ -47,6 +66,9 @@ function mouseDownMoveBlock(mouseX, mouseY){
             }
         }
     }
+}
+
+function moveFromImmovableBlock(mouseX, mouseY){
     for(const i in immovableBlocks){
         if(immovableBlocks[i].blocks.length > 1){
             var index = immovableBlocks[i].mouseCollidesBlock(mouseX, mouseY);
@@ -68,7 +90,7 @@ function mouseDownMoveBlock(mouseX, mouseY){
     }
 }
 
-function mouseMoveRulesBlock(e){
+function keepMovingBlock(e){
     for(const i in allBlocks){
         if(allBlocks[i].moving){
             var mouseX = e.clientX - allBlocks[i].differenceX;
@@ -76,10 +98,9 @@ function mouseMoveRulesBlock(e){
             allBlocks[i].moveWholeBlock(mouseX, mouseY);
         }
     }
-    draw();
 }
 
-function mouseUpRulesBlock(e){
+function stopMovingBlock(e){
     for(const i in allBlocks){
         if(allBlocks[i].moving){
             var mouseX = e.clientX - allBlocks[i].differenceX;
@@ -113,5 +134,4 @@ function mouseUpRulesBlock(e){
             }
         }
     }
-    draw();
 }
