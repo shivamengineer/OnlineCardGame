@@ -147,50 +147,38 @@ function stopMovingBlock(e){
                         }
                     }
                 }
-                while(removedGotoSet.size > 0){
-                    for(const i in allBlocks){
-                        for(j = 0; j < allBlocks[i].blocks.length; j++){
-                            if(allBlocks[i].blocks[j].gotoType && removedGotoSet.has(allBlocks[i].blocks[j].count)){
-                                console.log("remove");
-                                var temp = [];
-                                while(allBlocks[i].blocks.length > j + 1){
-                                    temp.push(allBlocks[i].blocks.pop());
-                                }
-                                allBlocks[i].blocks.pop();
-                                while(temp != -null){
-                                    allBlocks[i].blocks.push(temp.pop());
-                                }
-                                if(allBlocks[i].blocks.length == 0){
-                                    var tempBlocks = [];
-                                    while(allBlocks.length > i + 1){
-                                        tempBlocks.push(allBlocks.pop());
-                                    }
-                                    allBlocks.pop();
-                                    while(tempBlocks != -null){
-                                        allBlocks.push(tempBlocks.pop());
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                removeGotoBlocks(removedGotoSet);
             }
         }
     }
 }
 
 function removeGotoBlocks(removeSet){
-    for(const i in allBlocks && removeSet.size > 0){
+    var toRemove = [];
+    for(const i in allBlocks){
         for(j = 0; j < allBlocks[i].blocks.length; j++){
-            if(allBlocks[i].blocks[j].gotoType && removeSet.has(allBlocks[i].blocks[j].count)){
-                var temp = [];
-                while(allBlocks[i].blocks.length > j + 1){
-                    temp.push(allBlocks[i].blocks.pop());
-                }
-                allBlocks[i].blocks.pop();
-                while(temp != -null){
-                    allBlocks[i].blocks.push(temp.pop());
-                }
+            if(removedGotoSet.has(allBlocks[i].blocks[j].count)){
+                toRemove.push([i, j])
+            }
+        }
+    }
+    for(i = 0; i < toRemove.length; i++){
+        var temp = [];
+        while(allBlocks[toRemove[i][0]].blocks.length > toRemove[i][1] + 1){
+            temp.push(allBlocks[toRemove[i][0]].blocks.pop());
+        }
+        allBlocks[toRemove[i][0]].blocks.pop();
+        while(temp != -null){
+            allBlocks[toRemove[i][0]].blocks.push(temp.pop());
+        }
+        if(allBlocks[toRemove[i][0]].blocks.length == 0){
+            var temp2 = [];
+            while(allBlocks.length > toRemove[i][0] + 1){
+                temp2.push(allBlocks.pop());
+            }
+            allBlocks.pop();
+            while(temp2 != -null){
+                allBlocks.push(temp2.pop());
             }
         }
     }
