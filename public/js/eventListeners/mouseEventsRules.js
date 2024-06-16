@@ -157,8 +157,9 @@ function removeGotoBlocks(removeSet){
     var toRemove = [];
     for(const i in allBlocks){
         for(j = 0; j < allBlocks[i].blocks.length; j++){
-            if(removedGotoSet.has(allBlocks[i].blocks[j].count)){
+            if(removeSet.has(allBlocks[i].blocks[j].count)){
                 toRemove.push([i, j])
+                removeSet.delete(allBlocks[i].blocks[j].count);
             }
         }
     }
