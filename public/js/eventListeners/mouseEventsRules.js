@@ -127,14 +127,25 @@ function stopMovingBlock(e){
                     }
                 }
             }
-            if(added || !collides(allBlocks[i].blocks[0], createRulesPage)){
-                var temp = [];
-                while(allBlocks.length > i + 1){
-                    temp.push(allBlocks.pop());
+            if(added){
+                delete allBlocks[i];
+                for(j = 0; j < allBlocks.length; j++){
+                    if(allBlocks[0] != null){
+                        allBlocks.push(allBlocks.shift());
+                    } else {
+                        allBlocks.shift();
+                    }
                 }
-                var temp2 = allBlocks.pop();
-                while(temp != -null){
-                    allBlocks.push(temp.pop());
+            }
+            if(allBlocks[i] != null && !collides(allBlocks[i].blocks[0], createRulesPage)){
+                var temp2 = allBlocks[i];
+                delete allBlocks[i];
+                for(j = 0; j < allBlocks.length; j++){
+                    if(allBlocks[0] != null){
+                        allBlocks.push(allBlocks.shift());
+                    } else {
+                        allBlocks.shift();
+                    }
                 }
                 
                 for(j = 0; j < temp2.blocks.length; j++){
@@ -164,23 +175,27 @@ function removeGotoBlocks(removeSet){
         }
     }
     for(i = 0; i < toRemove.length; i++){
-        var temp = [];
-        while(allBlocks[toRemove[i][0]].blocks.length > toRemove[i][1] + 1){
-            temp.push(allBlocks[toRemove[i][0]].blocks.pop());
-        }
-        allBlocks[toRemove[i][0]].blocks.pop();
-        while(temp != -null){
-            allBlocks[toRemove[i][0]].blocks.push(temp.pop());
-        }
-        if(allBlocks[toRemove[i][0]].blocks.length == 0){
-            var temp2 = [];
-            while(allBlocks.length > toRemove[i][0] + 1){
-                temp2.push(allBlocks.pop());
+        delete(allBlocks[toRemove[i][0]].blocks[toRemove[i][1]]);
+    }
+    for(i = 0; i < allBlocks.length; i++){
+        for(j = 0; j < allBlocks[i].blocks.length; j++){
+            if(allBlocks[i].blocks[0] != null){
+                allBlocks[i].blocks.push(allBlocks[i].blocks.shift());
+            } else {
+                allBlocks[i].blocks.shift();
             }
-            allBlocks.pop();
-            while(temp2 != -null){
-                allBlocks.push(temp2.pop());
-            }
+        }
+        if(allBlocks[i].blocks.length == 0){
+            delete allBlocks[i];
+
         }
     }
+    for(i = 0; i < allBlocks.length; i++){
+        if(allBlocks[0] != null){
+            allBlocks.push(allBlocks.shift());
+        } else {
+            allBlocks.shift();
+        }
+    }
+
 }
