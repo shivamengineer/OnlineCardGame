@@ -42,9 +42,9 @@ var startRect = new Rect(255, 55, 80, 30, "blue");
 startRect.text = "start";
 var startBlock = new CodeBlock(startRect);
 var breakRect = new Rect(100, 220, 80, 30, "blue");
-breakRect.text = "break";
+breakRect.text = "goto ";
 var continueRect = new Rect(100, 250, 80, 30, "blue");
-continueRect.text = "continue";
+continueRect.text = "continue ";
 
 var createBlocks = [];
 var createBreakContinueBlocks = [];
