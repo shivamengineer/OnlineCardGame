@@ -30,10 +30,12 @@ function createBlocksFromRect(mouseX, mouseY){
         if(mouseCollides(mouseX, mouseY, createBreakContinueBlocks[i])){
             var tempBreakRect = new Rect(breakRect.x, breakRect.y, breakRect.width, breakRect.height, breakRect.color);
             tempBreakRect.text = breakRect.text;
+            tempBreakRect.text += gotoBlocksCount;
             tempBreakRect.gotoType = true;
             tempBreakRect.count = gotoBlocksCount;
             var tempContinueRect = new Rect(continueRect.x, continueRect.y, continueRect.width, continueRect.height, continueRect.color);
             tempContinueRect.text = continueRect.text;
+            tempContinueRect.text += gotoBlocksCount;
             tempContinueRect.gotoType = true;
             tempContinueRect.count = gotoBlocksCount;
             gotoBlocksCount++;
