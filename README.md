@@ -14,3 +14,5 @@ ideally be able to play any game with standard playing cards
 
 Afterwards, there may be other features added, but that will
 be much later
+
+May eventually allow playing on other platforms
