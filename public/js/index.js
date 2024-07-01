@@ -21,10 +21,10 @@ var cardSelected = -1;
 var cardRotating = false;
 
 //0 = game, 1 = homescreen, 2 = rules engine
-var currentPage = 0;
+var currentPage = 1;
 
 var button1Rect = new Rect(400, 500, 100, 30, "white");
-button1Rect.text = "Home Screen";
+button1Rect.text = "Game";
 var button2Rect = new Rect(550, 500, 100, 30, "white");
 button2Rect.text = "Rules Engine";
 const degree = Math.PI / 180;
