@@ -55,13 +55,6 @@ function drawButtons(){
 
 function drawTesting(){
     //testing
-    ctx2.save();
-    ctx2.rotate(degree * 40);
-    ctx2.fillStyle = "green";
-    var x7 = (rect2.x * Math.cos(degree * 40)) + (rect2.y * Math.sin(degree * 40));
-    var y7 = -(rect2.x * Math.sin(degree * 40)) + (rect2.y * Math.cos(degree * 40));
-    ctx2.fillRect(x7, y7, rect2.width, rect2.height);
-    ctx2.restore();
 }
 
 function drawRulesEngine(){

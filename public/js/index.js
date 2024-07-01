@@ -29,8 +29,6 @@ var button2Rect = new Rect(550, 500, 100, 30, "white");
 button2Rect.text = "Rules Engine";
 const degree = Math.PI / 180;
 
-var rect2 = new Rect(400, 300, 50, 50, "pink");
-
 var createRulesPage = new Rect(250, 50, 500, 400, "white");
 var gamePreviewPage = new Rect(800, 50, 500, 400, "white");
 
