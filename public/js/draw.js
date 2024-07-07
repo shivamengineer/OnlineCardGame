@@ -55,6 +55,11 @@ function drawButtons(){
 
 function drawTesting(){
     //testing
+    joinGameButton.render();
+    joinGameButton.renderText(joinGameButton.text);
+    if(openKeypad){
+        drawKeypad();
+    }
 }
 
 function drawRulesEngine(){
@@ -105,5 +110,12 @@ function drawCodeBlocks(){
     }
     if(temp != -1){
         allBlocks[temp].renderCodeBlock();
+    }
+}
+
+function drawKeypad(){
+    for(const i in keypad){
+        keypad[i].render();
+        keypad[i].renderText(keypad[i].text);
     }
 }

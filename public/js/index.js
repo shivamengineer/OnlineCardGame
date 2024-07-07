@@ -29,6 +29,20 @@ var button2Rect = new Rect(550, 500, 100, 30, "white");
 button2Rect.text = "Rules Engine";
 const degree = Math.PI / 180;
 
+var joinGameButton = new Rect(150, 300, 100, 30, "white");
+joinGameButton.text = "Join Game";
+
+const keypad = [];
+keypad.x = joinGameButton.x, keypad.y = joinGameButton.y + 50;
+
+for(i = 0; i < 10; i++){
+  var num = new Rect(keypad.x + (25 * i), keypad.y, 15, 20, "white");
+  num.text = i;
+  keypad.push(num);
+}
+
+var openKeypad = false;
+
 var createRulesPage = new Rect(250, 50, 500, 400, "white");
 var gamePreviewPage = new Rect(800, 50, 500, 400, "white");
 
