@@ -1,6 +1,6 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
-const img = document.getElementById("5S");
+var img = document.getElementById("5S");
 var ctx2 = canvas.getContext('2d');
 
 const socket = io();
@@ -19,6 +19,8 @@ var shift = false;
 var numPlayers = 0;
 var cardSelected = -1;
 var cardRotating = false;
+
+var suitValue = ["S", "C", "H", "D"];
 
 //0 = game, 1 = homescreen, 2 = rules engine
 var currentPage = 1;

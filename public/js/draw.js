@@ -25,7 +25,7 @@ function drawAlways(){
 
 function drawCards(){
     for(const i in frontendCards){
-        frontendCards[i].renderCard(img);
+        frontendCards[i].renderCard();
     }
 }
 

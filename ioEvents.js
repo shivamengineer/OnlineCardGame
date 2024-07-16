@@ -1,8 +1,9 @@
 function start(cards){
     for(i = 0; i < 5; i++){
+      //suits: 0: S, 1: C, 2: H, 3: D
       cards[i] = {
-        value: 1,
-        suit: 2,
+        value: 2,
+        suit: 0,
         visible: true,
         cardID: i,
         x: 50 + (100 * i),
