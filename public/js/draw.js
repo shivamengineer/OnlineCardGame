@@ -5,6 +5,9 @@ function draw() {
         drawGame();
     } else if(currentPage == 1){
         drawTesting();
+        if(openKeypad){
+            drawKeypad();
+        }
     } else if(currentPage == 2){
         drawRulesEngine();
         drawCodeBlocks();
@@ -114,7 +117,7 @@ function drawCodeBlocks(){
 }
 
 function drawKeypad(){
-    for(const i in keypad){
+    for(i = 0; i < 10; i++){
         keypad[i].render();
         keypad[i].renderText(keypad[i].text);
     }

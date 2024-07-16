@@ -1,6 +1,6 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
-const img = document.getElementById("10S");
+const img = document.getElementById("5S");
 var ctx2 = canvas.getContext('2d');
 
 const socket = io();
