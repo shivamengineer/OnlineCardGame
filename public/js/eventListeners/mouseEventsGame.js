@@ -8,7 +8,6 @@ function mouseDownEventGame(e){
     } else {
         mouseDownMove(mouseX, mouseY);
     }
-
     draw();
 }
 
@@ -19,6 +18,7 @@ function mouseDownRotate(mouseX, mouseY){
             frontendCards[i].rotating = true;
             frontendCards[i].startX = mouseX;
             frontendCards[i].startY = mouseY;
+            socket.emit('shiftCards', i);
         }
     }
 }
@@ -29,6 +29,7 @@ function mouseDownMove(mouseX, mouseY){
             frontendCards[i].moving = true;
             frontendCards[i].differenceX = mouseX - frontendCards[i].x;
             frontendCards[i].differenceY = mouseY - frontendCards[i].y;
+            socket.emit('shiftCards', i);
         }
     }
 }

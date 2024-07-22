@@ -171,7 +171,7 @@ function removeGotoBlocks(removeSet){
     for(const i in allBlocks){
         for(j = 0; j < allBlocks[i].blocks.length; j++){
             if(removeSet.has(allBlocks[i].blocks[j].count)){
-                toRemove.push([i, j])
+                toRemove.push([i, j]);
                 removeSet.delete(allBlocks[i].blocks[j].count);
             }
         }
@@ -199,5 +199,5 @@ function removeGotoBlocks(removeSet){
             allBlocks.shift();
         }
     }
-
+    
 }

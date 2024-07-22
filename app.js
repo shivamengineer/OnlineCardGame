@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
 });
 
 const players = {};
+const rooms = {};
 const deck = new deckA.Deck(0);
 console.log(deck);
 const cards = {};
@@ -45,6 +46,17 @@ io.on('connection', (socket) => {
   //updates based on keydown events
   socket.on('keydown', (keycode) => {
     ioEventsLib.keyDown(keycode);
+  });
+
+  //has player join new game
+  socket.on('joinGame', (roomID) => {
+    ioEventsLib.joinGame(rooms, roomID, socket.id);
+  });
+
+  //shifts card order for rendering
+  socket.on('shiftCards', (i) => {
+    ioEventsLib.shiftCards(cards, i);
+    io.emit('updatePlayers', players, cards);
   });
 
   //updates based on the mouse moving

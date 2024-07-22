@@ -6,7 +6,6 @@ function keyDownEvents(e){
         case 65:
             img = document.getElementById("5C");
             draw();
-            console.log("A2");
             socket.emit('keydown', 65);
             break;
     }

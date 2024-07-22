@@ -13,10 +13,10 @@ const frontendCards = {};
 const menuOptions = {};
 const distanceBetweenPlayers = 50;
 var menuAttribs = [0, 0, 75, 20, "white"];
-var menuTitles = ["rotate right", "rotate left"];
 var cardMenuOpen = false;
 var shift = false;
 var numPlayers = 0;
+
 var cardSelected = -1;
 var cardRotating = false;
 
@@ -31,17 +31,23 @@ var button2Rect = new Rect(550, 500, 100, 30, "white");
 button2Rect.text = "Rules Engine";
 const degree = Math.PI / 180;
 
-var joinGameButton = new Rect(150, 300, 100, 30, "white");
-joinGameButton.text = "Join Game";
+var enterRoomCode = new Rect(150, 300, 130, 30, "white");
+enterRoomCode.text = "Enter Room Code";
 
 const keypad = [];
-keypad.x = joinGameButton.x, keypad.y = joinGameButton.y + 50;
+keypad.x = enterRoomCode.x, keypad.y = enterRoomCode.y + 50;
 
 for(i = 0; i < 10; i++){
   var num = new Rect(keypad.x + (25 * i), keypad.y, 15, 20, "white");
   num.text = i;
   keypad.push(num);
 }
+
+var joinGameButton = new Rect(keypad.x + 70, keypad.y + 35, 80, 30, "white");
+joinGameButton.text = "Join Game";
+
+var newRoomEntry = new Rect(keypad.x, keypad.y + 35, 55, 25, "white");
+newRoomEntry.text = "";
 
 var openKeypad = false;
 

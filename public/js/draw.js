@@ -58,10 +58,14 @@ function drawButtons(){
 
 function drawTesting(){
     //testing
-    joinGameButton.render();
-    joinGameButton.renderText(joinGameButton.text);
+    enterRoomCode.render();
+    enterRoomCode.renderText(enterRoomCode.text);
     if(openKeypad){
         drawKeypad();
+        drawNewRoomBox();
+        if(newRoomEntry.text.length == 6){
+            drawJoinGameButton();
+        }
     }
 }
 
@@ -121,4 +125,14 @@ function drawKeypad(){
         keypad[i].render();
         keypad[i].renderText(keypad[i].text);
     }
+}
+
+function drawNewRoomBox(){
+    newRoomEntry.render();
+    newRoomEntry.renderText(newRoomEntry.text);
+}
+
+function drawJoinGameButton(){
+    joinGameButton.render();
+    joinGameButton.renderText(joinGameButton.text);
 }
