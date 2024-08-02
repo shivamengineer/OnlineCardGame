@@ -10,6 +10,7 @@ function start(cards){
         y: 200,
         rotation: 0
       }
+      cards.length++;
     }
   }
   
@@ -26,6 +27,7 @@ function start(cards){
   function end(cards){
     for(i = 0; i < 5; i++){
         delete(cards[i]);
+        cards.length = 0;
     }
   }
   

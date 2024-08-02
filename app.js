@@ -23,6 +23,7 @@ const rooms = {};
 const deck = new deckA.Deck(0);
 console.log(deck);
 const cards = {};
+cards.length = 0;
 players.numPlayers = 0;
 var started = false;
 
