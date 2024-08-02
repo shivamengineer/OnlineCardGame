@@ -116,11 +116,11 @@ class Deck{
     }
 
     createFullDeck(){
-        var d = new Deck();
+        this.clear();
         for(i = 2; i < 11; i++){
             for(j = 0; j < 4; j++){
                 var c = new Card(i, j, true, i * j, 0, 0);
-                d.addToTop(c);
+                this.addToTop(c);
             }
         }
     }
