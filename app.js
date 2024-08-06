@@ -25,7 +25,7 @@ cards.length = 0;
 players.numPlayers = 0;
 var started = false;
 
-const decks = {};
+const decks = [];
 
 //checks events whenever any event is sent to server
 io.on('connection', (socket) => {
