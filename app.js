@@ -20,12 +20,12 @@ app.get('/', (req, res) => {
 
 const players = {};
 const rooms = {};
-const deck = new deckA.Deck(0);
-console.log(deck);
 const cards = {};
 cards.length = 0;
 players.numPlayers = 0;
 var started = false;
+
+const decks = {};
 
 //checks events whenever any event is sent to server
 io.on('connection', (socket) => {
