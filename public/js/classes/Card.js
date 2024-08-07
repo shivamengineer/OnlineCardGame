@@ -3,7 +3,7 @@ class Card {
         this.value = cardValue;
         this.suit = cardSuit;
         this.visible = visibility;
-        this.deckID = ID;
+        this.cardID = ID;
         this.moving = false;
         this.rotating = false;
         this.image = document.getElementById(this.value + suitValue[this.suit]);

@@ -1,5 +1,5 @@
 const ioEventsLib = require('./ioEvents');
-const deckA = require('./public/js/classes/Deck');
+const deckA = require('./deckUpdate');
 const cardClass = require('./public/js/classes/Card');
 const express = require('express');
 const app = express();
@@ -32,7 +32,8 @@ io.on('connection', (socket) => {
 
   //creates 5 cards if the first player connects
   if(!started){
-    ioEventsLib.start(cards);
+    //ioEventsLib.start(cards);
+    deckA.startDecks(decks);
     started = true;
   }
 
@@ -93,7 +94,8 @@ function disconnectPlayer(socketID){
   delete players[socketID];
   players.numPlayers--;
   if(players.numPlayers == 0){
-    ioEventsLib.end(cards);
+    //ioEventsLib.end(cards);
+    deckA.endDecks(decks);
     started = false;
   }
   io.emit('updatePlayers', players, cards);
