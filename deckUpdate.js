@@ -1,8 +1,8 @@
 class Card {
     constructor(cardValue, cardSuit, x, y){
+        this.visible = {};
         this.value = cardValue;
         this.suit = cardSuit;
-        this.visible = [1, 2, 3, 4];
         this.moving = false;
         this.rotating = false;
         this.x = x;
@@ -11,19 +11,19 @@ class Card {
     }
     
     equal(c) {
-        if(this.value != c.value || this.suit != c.suit) {
-            return false;
-        }
-        return true;
+        return this.value == c.value && this.suit == c.suit;
     }
 
 }
 
 class Deck {
-    constructor(ID) {
+    constructor(ID, x, y) {
         this.length = 0;
-        this.deck = {};
+        this.deck = [];
         this.dID = ID;
+        this.topCard = null;
+        this.x = x;
+        this.y = y;
     }
 
     addCard(card, pos){
@@ -31,6 +31,7 @@ class Deck {
         assert(pos>=0, "position is less than zero");
         if(pos == this.length) {
             this.deck.push(card);
+            this.topCard = card;
         }
         else {
             var c = this.deck.pop();
@@ -42,13 +43,14 @@ class Deck {
 
     addToTop(card) {
         this.deck.push(card);
+        this.topCard = card;
         this.length++;
     }
 
-    addCardSecondary(val, suit, vis, iD, pos){
+    addCardSecondary(val, suit, pos){
         assert(pos<=this.length, "position is greater than length of deck");
         assert(pos>=0, "position is less than zero");
-        var card = new Card(val, suit, vis, iD)
+        var card = new Card(val, suit, 0, 0)
         if(pos == this.length) {
             this.deck.push(card);
         }
@@ -60,14 +62,19 @@ class Deck {
         this.length++;
     }
 
-    addToTop(val, suit, vis, iD) {
-        this.deck.push(new Card(val, suit, vis, iD));
+    addToTopSecondary(val, suit) {
+        var c = new Card(val, suit, 0, 0);
+        this.deck.push(c);
+        this.topCard = c;
         this.length++;
     }
 
     removeCardAtIndex(i) {
         assert(this.length > i, "index out of bounds");
         this.length--;
+        if(i == this.length){
+            this.topCard = this.deck[this.length - 1];
+        }
         return this.deck.splice(i, i);
     }
 
@@ -99,11 +106,14 @@ class Deck {
 
     flip() {
         this.deck.reverse();
+        this.setTopCard();
     }
 
     cut(start, end) {
         this.length -= (end - start);
-        return this.deck.splice(start, end);
+        var cut = this.deck.splice(start, end);
+        this.setTopCard();
+        return cut;
     }
 
     addDeck(d) {
@@ -111,6 +121,7 @@ class Deck {
             this.deck[this.length] = item;
             this.length++
         });
+        this.setTopCard();
     }
 
     shuffle() {
@@ -119,6 +130,7 @@ class Deck {
             c = this.removeCard(r);
             this.addToTop(c);
         }
+        this.setTopCard();
     }
 
     clear(){
@@ -126,16 +138,21 @@ class Deck {
             this.deck.pop();
         }
         this.length = 0;
+        this.topCard = null;
     }
 
     createFullDeck(){
         this.clear();
-        for(i = 2; i < 11; i++){
-            for(j = 0; j < 4; j++){
-                var c = new Card(i, j, i * j, 0, 0);
+        for(let j = 2; j < 11; j++){
+            for(let k = 0; k < 4; k++){
+                var c = new Card(i, j, 0, 0);
                 this.addToTop(c);
             }
         }
+    }
+
+    setTopCard(){
+        this.topCard = this.deck[this.length - 1];
     }
 }
 
@@ -165,14 +182,13 @@ function combineDecks(allDecks, deckID1, deckID2){
     allDecks[deckID1].addDeck(allDecks[deckID2]);
     for(i = 0; i < allDecks.length; i++){
         var temp = allDecks.shift();
-        if(temp.dID > deckID){
+        if(temp.dID > deckID2){
             temp.dID--;
         }
-        if(i != deckID){
+        if(i != deckID2){
             allDecks.push(temp);
         }
     }
-    allDecks.length--;
 }
 
 function startDecks(allDecks){
