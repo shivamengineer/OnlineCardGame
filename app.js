@@ -1,6 +1,5 @@
 const ioEventsLib = require('./ioEvents');
 const deckA = require('./deckUpdate');
-const cardClass = require('./public/js/classes/Card');
 const express = require('express');
 const app = express();
 
