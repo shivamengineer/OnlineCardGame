@@ -61,13 +61,13 @@ io.on('connection', (socket) => {
 
   //updates based on the mouse moving
   socket.on('mousemove', (mouseX, mouseY, i) => {
-    ioEventsLib.moveDeck(mouseX, mouseY, i, cards);
+    ioEventsLib.moveDeck(mouseX, mouseY, i, decks);
     io.emit('updatePlayers', players, decks);
   });
 
   //updates from mouseUp event for moving cards
   socket.on('mouseup', (mouseX, mouseY, i) => {
-    ioEventsLib.moveDeck(mouseX, mouseY, i, cards);
+    ioEventsLib.moveDeck(mouseX, mouseY, i, decks);
     io.emit('updatePlayers', players, decks);
   });
 
