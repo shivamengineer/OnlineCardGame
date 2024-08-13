@@ -1,9 +1,8 @@
 class Card {
-    constructor(cardValue, cardSuit, visibility, ID, x, y){
+    constructor(cardValue, cardSuit, visibility, x, y){
         this.value = cardValue;
         this.suit = cardSuit;
         this.visible = visibility;
-        this.cardID = ID;
         this.moving = false;
         this.rotating = false;
         this.image = document.getElementById(this.value + suitValue[this.suit]);

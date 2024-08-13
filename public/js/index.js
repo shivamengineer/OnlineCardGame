@@ -9,7 +9,7 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 const frontendPlayers = {};
-const frontendCards = {};
+const frontendDecks = {};
 const menuOptions = {};
 const distanceBetweenPlayers = 50;
 var menuAttribs = [0, 0, 75, 20, "white"];
@@ -84,9 +84,9 @@ for(i = 0; i < 2; i++){
   menuOptions[i] = new Rect(0, 0, menuAttribs[2], menuAttribs[3], menuAttribs[4]);
 }
 
-socket.on('updatePlayers', (backendPlayers, backendCards) => {
+socket.on('updatePlayers', (backendPlayers, backendDecks) => {
   connectPlayer(backendPlayers);
   removePlayer(backendPlayers);
-  updateCards(backendCards);
+  updateDecks(backendDecks);
   draw();
 });

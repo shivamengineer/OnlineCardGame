@@ -24,8 +24,8 @@ function drawAlways(){
 }
 
 function drawCards(){
-    for(const i in frontendCards){
-        frontendCards[i].renderCard();
+    for(const i in frontendDecks){
+        frontendDecks[i].renderDeck();
     }
 }
 

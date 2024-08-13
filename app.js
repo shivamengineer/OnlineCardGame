@@ -31,7 +31,6 @@ io.on('connection', (socket) => {
 
   //creates 5 cards if the first player connects
   if(!started){
-    //ioEventsLib.start(cards);
     deckA.startDecks(decks);
     started = true;
   }
@@ -57,29 +56,29 @@ io.on('connection', (socket) => {
   //shifts card order for rendering
   socket.on('shiftCards', (i) => {
     ioEventsLib.shiftCards(cards, i);
-    io.emit('updatePlayers', players, cards);
+    io.emit('updatePlayers', players, decks);
   });
 
   //updates based on the mouse moving
   socket.on('mousemove', (mouseX, mouseY, i) => {
-    ioEventsLib.moveCard(mouseX, mouseY, i, cards);
-    io.emit('updatePlayers', players, cards);
+    ioEventsLib.moveDeck(mouseX, mouseY, i, cards);
+    io.emit('updatePlayers', players, decks);
   });
 
   //updates from mouseUp event for moving cards
   socket.on('mouseup', (mouseX, mouseY, i) => {
-    ioEventsLib.moveCard(mouseX, mouseY, i, cards);
-    io.emit('updatePlayers', players, cards);
+    ioEventsLib.moveDeck(mouseX, mouseY, i, cards);
+    io.emit('updatePlayers', players, decks);
   });
 
   //updates from mouseUp event for rotating cards
   socket.on('rotateCard', (i, deltaX, deltaY) => {
     cards[i].rotation = Math.atan(deltaY / deltaX);
-    io.emit('updatePlayers', players, cards);
+    io.emit('updatePlayers', players, decks);
   });
 
   //socket.emit for local, io.emit for everyone
-  io.emit('updatePlayers', players, cards);
+  io.emit('updatePlayers', players, decks);
 
 });
 
@@ -93,9 +92,8 @@ function disconnectPlayer(socketID){
   delete players[socketID];
   players.numPlayers--;
   if(players.numPlayers == 0){
-    //ioEventsLib.end(cards);
     deckA.endDecks(decks);
     started = false;
   }
-  io.emit('updatePlayers', players, cards);
+  io.emit('updatePlayers', players, decks);
 }

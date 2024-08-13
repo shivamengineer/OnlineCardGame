@@ -1,8 +1,26 @@
 class Deck{
-    constructor(ID) {
-        this.length = 0;
-        this.deck = {};
-        this.dID = ID;
+    constructor(topCard, numCards, visible, x, y, rotation) {
+        this.topCard = topCard;
+        this.numCards = numCards;
+        this.visible = visible;
+        this.x = x;
+        this.y = y;
+        this.rotation = rotation;
+    }
+
+    updateDeck(topCard, numCards, visible, x, y, rotation){
+        this.topCard = topCard;
+        this.numCards = numCards;
+        this.visible = visible;
+        this.x = x;
+        this.y = y;
+        this.rotation = rotation;
+    }
+
+    renderDeck(){
+        var topCard = new Card(this.topCard.value, this.topCard.suit, this.topCard.visible, this.x, this.y);
+        topCard.image = document.getElementById(this.topCard.value + suitValue[this.topCard.suit]);
+        topCard.renderCard();
     }
 
     add(card, pos){
@@ -125,6 +143,8 @@ class Deck{
         }
     }
 
-}
+    render(){
 
-module.exports = {Deck};
+    }
+
+}

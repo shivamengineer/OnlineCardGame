@@ -21,17 +21,15 @@ function removePlayer(backendPlayers){
     }
 }
 
-function updateCards(backendCards){
-    for(const i in backendCards){
-      const backendCard = backendCards[i];
-      if(!frontendCards[i]){
-        frontendCards[i] = new Card(backendCard.value, backendCard.suit, backendCard.visible, backendCard.cardID, backendCard.x, backendCard.y);
-      } else {
-        frontendCards[i].x = backendCards[i].x;
-        frontendCards[i].y = backendCards[i].y;
-      }
-      frontendCards[i].rotation = backendCards[i].rotation;
+function updateDecks(backendDecks){
+  for(const i in backendDecks){
+    const backendDeck = backendDecks[i];
+    if(!frontendDecks[i]){
+      frontendDecks[i] = new Deck(backendDeck.topCard, backendDeck.numCards, backendDeck.visible, backendDeck.x, backendDeck.y, backendDeck.rotation);
+    } else {
+      frontendDecks[i].updateDeck(backendDeck.topCard, backendDeck.numCards, backendDeck.visible, backendDeck.x, backendDeck.y, backendDeck.rotation);
     }
+  }
 }
 
 function shiftPlayersLeft(temp){

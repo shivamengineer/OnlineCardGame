@@ -1,3 +1,5 @@
+var suitValue = ["S", "C", "H", "D"];
+
 class Card {
     constructor(cardValue, cardSuit, x, y){
         this.visible = {};
@@ -145,7 +147,7 @@ class Deck {
         this.clear();
         for(let j = 2; j < 11; j++){
             for(let k = 0; k < 4; k++){
-                var c = new Card(i, j, 0, 0);
+                var c = new Card(j, k, 0, 0);
                 this.addToTop(c);
             }
         }
@@ -156,12 +158,12 @@ class Deck {
     }
 }
 
-function addEmptyDeck(allDecks){
-    allDecks.push(new Deck(allDecks.length));
+function addEmptyDeck(allDecks, x, y){
+    allDecks.push(new Deck(allDecks.length, x, y));
 }
 
-function addFullDeck(allDecks){
-    var d = new Deck(allDecks.length);
+function addFullDeck(allDecks, x, y){
+    var d = new Deck(allDecks.length, x, y);
     d.createFullDeck();
     allDecks.push(d);
 }
@@ -193,7 +195,7 @@ function combineDecks(allDecks, deckID1, deckID2){
 
 function startDecks(allDecks){
     for(i = 0; i < 3; i++){
-        addFullDeck(allDecks);
+        addFullDeck(allDecks, 50 + (i * 100), 300);
     }
 }
 

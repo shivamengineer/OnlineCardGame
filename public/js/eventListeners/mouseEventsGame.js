@@ -12,23 +12,23 @@ function mouseDownEventGame(e){
 }
 
 function mouseDownRotate(mouseX, mouseY){
-    for(const i in frontendCards){
-        if(mouseCollidesCard(mouseX, mouseY, frontendCards[i], img)){
+    for(const i in frontendDecks){
+        if(mouseCollidesCard(mouseX, mouseY, frontendDecks[i], img)){
             cardRotating = true;
-            frontendCards[i].rotating = true;
-            frontendCards[i].startX = mouseX;
-            frontendCards[i].startY = mouseY;
+            frontendDecks[i].rotating = true;
+            frontendDecks[i].startX = mouseX;
+            frontendDecks[i].startY = mouseY;
             socket.emit('shiftCards', i);
         }
     }
 }
 
 function mouseDownMove(mouseX, mouseY){
-    for(const i in frontendCards){
-        if(mouseCollidesCard(mouseX, mouseY, frontendCards[i], img)){
-            frontendCards[i].moving = true;
-            frontendCards[i].differenceX = mouseX - frontendCards[i].x;
-            frontendCards[i].differenceY = mouseY - frontendCards[i].y;
+    for(const i in frontendDecks){
+        if(mouseCollidesCard(mouseX, mouseY, frontendDecks[i], img)){
+            frontendDecks[i].moving = true;
+            frontendDecks[i].differenceX = mouseX - frontendDecks[i].x;
+            frontendDecks[i].differenceY = mouseY - frontendDecks[i].y;
             socket.emit('shiftCards', i);
         }
     }
@@ -36,10 +36,10 @@ function mouseDownMove(mouseX, mouseY){
 
 //mouse move events
 function mouseMoveEventGame(e){
-    for(const i in frontendCards){
-        if(frontendCards[i].moving){
-            var mouseX = e.clientX - frontendCards[i].differenceX;
-            var mouseY = e.clientY - frontendCards[i].differenceY;
+    for(const i in frontendDecks){
+        if(frontendDecks[i].moving){
+            var mouseX = e.clientX - frontendDecks[i].differenceX;
+            var mouseY = e.clientY - frontendDecks[i].differenceY;
             socket.emit('mousemove', mouseX, mouseY, i);
         }
     }
@@ -50,29 +50,29 @@ function mouseMoveEventGame(e){
 }
 
 function rotateCard(e){
-    for(const i in frontendCards){
-        if(frontendCards[i].rotating){
-            var deltaX = e.clientX - frontendCards[i].startX;
-            var deltaY = e.clientY - frontendCards[i].startY;
-            frontendCards[i].rotation = Math.atan(deltaY / deltaX);
+    for(const i in frontendDecks){
+        if(frontendDecks[i].rotating){
+            var deltaX = e.clientX - frontendDecks[i].startX;
+            var deltaY = e.clientY - frontendDecks[i].startY;
+            frontendDecks[i].rotation = Math.atan(deltaY / deltaX);
         }
     }
 }
 
 //mouse up events
 function mouseUpEventGame(e){
-    for(const i in frontendCards){
-        if(frontendCards[i].moving){
-            var mouseX = e.clientX - frontendCards[i].differenceX;
-            var mouseY = e.clientY - frontendCards[i].differenceY;
+    for(const i in frontendDecks){
+        if(frontendDecks[i].moving){
+            var mouseX = e.clientX - frontendDecks[i].differenceX;
+            var mouseY = e.clientY - frontendDecks[i].differenceY;
             socket.emit('mouseup', mouseX, mouseY, i);
-            frontendCards[i].moving = false;
+            frontendDecks[i].moving = false;
         }
-        if(frontendCards[i].rotating){
-            var mouseX = e.clientX - frontendCards[i].startX;
-            var mouseY = e.clientY - frontendCards[i].startY;
+        if(frontendDecks[i].rotating){
+            var mouseX = e.clientX - frontendDecks[i].startX;
+            var mouseY = e.clientY - frontendDecks[i].startY;
             socket.emit('rotateCard', i, mouseX, mouseY);
-            frontendCards[i].rotating = false;
+            frontendDecks[i].rotating = false;
         }
     }
     draw();
