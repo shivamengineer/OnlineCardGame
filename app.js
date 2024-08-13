@@ -73,7 +73,7 @@ io.on('connection', (socket) => {
 
   //updates from mouseUp event for rotating cards
   socket.on('rotateCard', (i, deltaX, deltaY) => {
-    cards[i].rotation = Math.atan(deltaY / deltaX);
+    decks[i].rotation = Math.atan(deltaY / deltaX);
     io.emit('updatePlayers', players, decks);
   });
 
