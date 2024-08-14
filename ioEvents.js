@@ -15,12 +15,6 @@
   function joinGame(rooms, roomNum, socketID){
     //rooms[roomNum].addPlayer(socketID);
   }
-
-  function shiftCards(backendCards, i){
-    for(const j in backendCards){
-      
-    }
-  }
   
   function keyDownGame(keycodeValue){
     switch(keycodeValue){

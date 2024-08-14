@@ -53,12 +53,6 @@ io.on('connection', (socket) => {
     ioEventsLib.joinGame(rooms, roomID, socket.id);
   });
 
-  //shifts card order for rendering
-  socket.on('shiftCards', (i) => {
-    ioEventsLib.shiftCards(cards, i);
-    io.emit('updatePlayers', players, decks);
-  });
-
   //updates based on the mouse moving
   socket.on('mousemove', (mouseX, mouseY, i) => {
     ioEventsLib.moveDeck(mouseX, mouseY, i, decks);

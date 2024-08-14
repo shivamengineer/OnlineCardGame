@@ -18,7 +18,6 @@ function mouseDownRotate(mouseX, mouseY){
             frontendDecks[i].rotating = true;
             frontendDecks[i].startX = mouseX;
             frontendDecks[i].startY = mouseY;
-            socket.emit('shiftCards', i);
         }
     }
 }
@@ -29,7 +28,6 @@ function mouseDownMove(mouseX, mouseY){
             frontendDecks[i].moving = true;
             frontendDecks[i].differenceX = mouseX - frontendDecks[i].x;
             frontendDecks[i].differenceY = mouseY - frontendDecks[i].y;
-            socket.emit('shiftCards', i);
         }
     }
 }
