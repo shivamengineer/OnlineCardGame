@@ -33,4 +33,4 @@
     decks[i].y = y;
   }
 
-  module.exports = {connectPlayer, keyDown, joinGame, shiftCards, moveDeck};
+  module.exports = {connectPlayer, keyDown, joinGame, moveDeck};

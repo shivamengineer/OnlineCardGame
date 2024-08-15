@@ -20,6 +20,11 @@ class Deck{
     renderDeck(){
         var topCard = new Card(this.topCard.value, this.topCard.suit, this.topCard.visible, this.x, this.y);
         topCard.image = document.getElementById(this.topCard.value + suitValue[this.topCard.suit]);
+        if(!this.rotation){
+            topCard.rotation = 0;
+        } else {
+            topCard.rotation = this.rotation;
+        }
         topCard.renderCard();
     }
 
