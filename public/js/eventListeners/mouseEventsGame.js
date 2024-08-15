@@ -4,9 +4,11 @@ function mouseDownEventGame(e){
     var mouseY = e.clientY;
 
     if(shift){
+        mouseDownMove(mouseX, mouseY);
+    } else if(alt){
         mouseDownRotate(mouseX, mouseY);
     } else {
-        mouseDownMove(mouseX, mouseY);
+        mouseDownTopCard(mouseX, mouseY);
     }
     draw();
 }
@@ -28,6 +30,14 @@ function mouseDownMove(mouseX, mouseY){
             frontendDecks[i].moving = true;
             frontendDecks[i].differenceX = mouseX - frontendDecks[i].x;
             frontendDecks[i].differenceY = mouseY - frontendDecks[i].y;
+        }
+    }
+}
+
+function mouseDownTopCard(mouseX, mouseY){
+    for(const i in frontendDecks){
+        if(mouseCollidesCard(mouseX, mouseY, frontendDecks[i], img)){
+            socket.emit('movetopcard', mouseX, mouseY, i);
         }
     }
 }

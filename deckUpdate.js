@@ -29,17 +29,14 @@ class Deck {
     }
 
     addCard(card, pos){
-        assert(pos<=this.length, "position is greater than length of deck");
-        assert(pos>=0, "position is less than zero");
-        if(pos == this.length) {
-            this.deck.push(card);
-            this.topCard = card;
+        var tempDeck = [];
+        while(this.deck.length > pos){
+            tempDeck.push(this.deck.pop());
         }
-        else {
-            var c = this.deck.pop();
-            this.add(card, pos);
-            this.deck.push(c);
-        } 
+        this.deck.push(card);
+        while(tempDeck.length > 0){
+            this.deck.push(tempDeck.pop());
+        }
         this.length++;
     }
 
@@ -55,8 +52,7 @@ class Deck {
         var card = new Card(val, suit, 0, 0)
         if(pos == this.length) {
             this.deck.push(card);
-        }
-        else {
+        } else {
             c = this.deck.pop();
             this.add(card, pos);
             this.deck.push(c);
@@ -69,6 +65,12 @@ class Deck {
         this.deck.push(c);
         this.topCard = c;
         this.length++;
+    }
+
+    removeTopCard(){
+        this.length--;
+        this.topCard = this.deck[this.length - 1];
+        return this.deck.pop();
     }
 
     removeCardAtIndex(i) {
@@ -169,6 +171,7 @@ function addFullDeck(allDecks, x, y){
 }
 
 function removeDeck(allDecks, deckID){
+    var removedDeck;
     for(i = 0; i < allDecks.length; i++){
         var temp = allDecks.shift();
         if(temp.dID > deckID){
@@ -176,8 +179,11 @@ function removeDeck(allDecks, deckID){
         }
         if(i != deckID){
             allDecks.push(temp);
+        } else {
+            removedDeck = temp;
         }
     }
+    return removedDeck;
 }
 
 function combineDecks(allDecks, deckID1, deckID2){
@@ -205,4 +211,19 @@ function endDecks(allDecks){
     }
 }
 
-module.exports = {addEmptyDeck, removeDeck, combineDecks, startDecks, endDecks};
+function moveTopCard(x, y, i, allDecks){
+    addEmptyDeck(allDecks, x, y);
+    allDecks[allDecks.length - 1].addToTop(allDecks[i].removeTopCard());
+    if(allDecks[i].length == 0){
+        for(let j = 0; j < allDecks.length; j++){
+            if(j != i){
+                allDecks.push(allDecks.shift());
+            } else {
+                allDecks.shift();
+            }
+        }
+    }
+    return allDecks.length - 1;
+}
+
+module.exports = {addEmptyDeck, removeDeck, combineDecks, startDecks, endDecks, moveTopCard};

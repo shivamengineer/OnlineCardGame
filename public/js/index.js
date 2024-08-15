@@ -9,12 +9,13 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 const frontendPlayers = {};
-const frontendDecks = {};
+const frontendDecks = [];
 const menuOptions = {};
 const distanceBetweenPlayers = 50;
 var menuAttribs = [0, 0, 75, 20, "white"];
 var cardMenuOpen = false;
 var shift = false;
+var alt = false;
 var numPlayers = 0;
 
 var cardSelected = -1;
@@ -89,4 +90,12 @@ socket.on('updatePlayers', (backendPlayers, backendDecks) => {
   removePlayer(backendPlayers);
   updateDecks(backendDecks);
   draw();
+});
+
+socket.on('moveTopCardResponse', (mouseX, mouseY, i) => {
+  //console.log(i);
+  //console.log(frontendDecks.length);
+  frontendDecks[i].moving = true;
+  frontendDecks[i].differenceX = mouseX - frontendDecks[i].x;
+  frontendDecks[i].differenceY = mouseY - frontendDecks[i].y;
 });

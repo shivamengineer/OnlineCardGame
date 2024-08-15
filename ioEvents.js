@@ -24,13 +24,13 @@
     }
   }
   
-  function moveDeck(x, y, i, decks){
-    moveDeckGame(x, y, i, decks);
+  function moveDeck(x, y, i, allDecks){
+    moveDeckGame(x, y, i, allDecks);
   }
   
-  function moveDeckGame(x, y, i, decks){
-    decks[i].x = x;
-    decks[i].y = y;
+  function moveDeckGame(x, y, i, allDecks){
+    allDecks[i].x = x;
+    allDecks[i].y = y;
   }
 
   module.exports = {connectPlayer, keyDown, joinGame, moveDeck};

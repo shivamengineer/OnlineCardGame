@@ -19,8 +19,6 @@ app.get('/', (req, res) => {
 
 const players = {};
 const rooms = {};
-const cards = {};
-cards.length = 0;
 players.numPlayers = 0;
 var started = false;
 
@@ -29,7 +27,7 @@ const decks = [];
 //checks events whenever any event is sent to server
 io.on('connection', (socket) => {
 
-  //creates 5 cards if the first player connects
+  //starts decks if the first player connects
   if(!started){
     deckA.startDecks(decks);
     started = true;
@@ -69,6 +67,12 @@ io.on('connection', (socket) => {
   socket.on('rotateCard', (i, deltaX, deltaY) => {
     decks[i].rotation = Math.atan(deltaY / deltaX);
     io.emit('updatePlayers', players, decks);
+  });
+
+  socket.on('movetopcard', (mouseX, mouseY, i) => {
+    var index = deckA.moveTopCard(mouseX, mouseY, i, decks);
+    io.emit('updatePlayers', players, decks);
+    socket.emit('moveTopCardResponse', mouseX, mouseY, index);
   });
 
   //socket.emit for local, io.emit for everyone
