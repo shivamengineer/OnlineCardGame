@@ -25,7 +25,10 @@ class Deck{
         } else {
             topCard.rotation = this.rotation;
         }
-        topCard.renderCard();
+        topCard.renderCard()
+        ctx.font = "16px serif";
+        ctx.strokeStyle = "white";
+        ctx.strokeText(this.numCards, this.x - 5, this.y - (topCard.image.naturalHeight / 2) - 2, topCard.image.naturalWidth);
     }
 
     add(card, pos){

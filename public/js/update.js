@@ -25,9 +25,9 @@ function updateDecks(backendDecks){
   for(const i in backendDecks){
     const backendDeck = backendDecks[i];
     if(!frontendDecks[i]){
-      frontendDecks[i] = new Deck(backendDeck.topCard, backendDeck.numCards, backendDeck.visible, backendDeck.x, backendDeck.y, backendDeck.rotation);
+      frontendDecks[i] = new Deck(backendDeck.topCard, backendDeck.length, backendDeck.visible, backendDeck.x, backendDeck.y, backendDeck.rotation);
     } else {
-      frontendDecks[i].updateDeck(backendDeck.topCard, backendDeck.numCards, backendDeck.visible, backendDeck.x, backendDeck.y, backendDeck.rotation);
+      frontendDecks[i].updateDeck(backendDeck.topCard, backendDeck.length, backendDeck.visible, backendDeck.x, backendDeck.y, backendDeck.rotation);
     }
   }
 }
