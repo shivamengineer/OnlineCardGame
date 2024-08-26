@@ -74,14 +74,14 @@ function mouseUpEventGame(e){
             var mouseX = e.clientX - frontendDecks[i].differenceX;
             var mouseY = e.clientY - frontendDecks[i].differenceY;
             socket.emit('mouseup', mouseX, mouseY, i);
-            frontendDecks[i].moving = false;
         }
         if(frontendDecks[i].rotating){
             var mouseX = e.clientX - frontendDecks[i].startX;
             var mouseY = e.clientY - frontendDecks[i].startY;
             socket.emit('rotateCard', i, mouseX, mouseY);
-            frontendDecks[i].rotating = false;
         }
+        frontendDecks[i].moving = false;
+        frontendDecks[i].rotating = false;
     }
     draw();
 }
