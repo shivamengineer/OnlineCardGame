@@ -10,15 +10,17 @@ function mouseDownEventButtons(e){
             case 0:
                 currentPage = 1;
                 button1Rect.text = "Game";
+                button2Rect.text = "Rules Engine";
                 break;
             case 1:
                 currentPage = 0;
                 button1Rect.text = "Home Screen";
+                button2Rect.text = "Rules Engine";
                 break;
             case 2:
                 currentPage = 0;
-                button1Rect.text = "Home Screen";
-                button2Rect.text = "Rules Engine";
+                button1Rect.text = "Game";
+                button2Rect.text = "Home Screen";
                 break;
         }
         draw();
@@ -31,10 +33,12 @@ function mouseDownEventButtons(e){
                 break;
             case 1:
                 currentPage = 2;
+                button1Rect.text = "Game";
                 button2Rect.text = "Home Screen";
                 break;
             case 2:
                 currentPage = 1;
+                button1Rect.text = "Game";
                 button2Rect.text = "Rules Engine";
                 break;
         }
