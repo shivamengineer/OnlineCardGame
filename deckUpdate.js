@@ -147,7 +147,7 @@ class Deck {
 
     createFullDeck(){
         this.clear();
-        for(let j = 2; j < 11; j++){
+        for(let j = 10; j >= 1; j--){
             for(let k = 0; k < 4; k++){
                 var c = new Card(j, k, 0, 0);
                 this.addToTop(c);
