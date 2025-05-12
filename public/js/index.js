@@ -45,10 +45,12 @@ for(i = 0; i < 10; i++){
 }
 
 var joinGameButton = new Rect(keypad.x + 70, keypad.y + 35, 80, 30, "white");
+joinGameButton.image = document.getElementById("game_button");
 joinGameButton.text = "Join Game";
 
 var newRoomEntry = new Rect(keypad.x, keypad.y + 35, 55, 25, "white");
-newRoomEntry.text = "";
+newRoomEntry.image = document.getElementById("rules_button");
+newRoomEntry.text = "Rules Engine";
 
 var openKeypad = false;
 

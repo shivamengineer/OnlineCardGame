@@ -78,13 +78,15 @@ function drawRulesEngine(){
 }
 
 function drawButton1Rect(){
-    button1Rect.render();
-    button1Rect.renderText(button1Rect.text);
+    ctx.drawImage(joinGameButton.image, button1Rect.x, button1Rect.y);
+    /*button1Rect.render();
+    button1Rect.renderText(button1Rect.text);*/
 }
 
 function drawButton2Rect(){
-    button2Rect.render();
-    button2Rect.renderText(button2Rect.text);
+    ctx.drawImage(newRoomEntry.image, button2Rect.x, button2Rect.y);
+    /*button2Rect.render();
+    button2Rect.renderText(button2Rect.text);*/
 }
 
 function drawWhileBlock(){
