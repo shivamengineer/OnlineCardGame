@@ -26,30 +26,30 @@ var suitValue = ["S", "C", "H", "D"];
 //0 = game, 1 = homescreen, 2 = rules engine
 var currentPage = 1;
 
-var button1Rect = new Rect(400, 500, 100, 30, "white");
-button1Rect.text = "Game";
-var button2Rect = new Rect(550, 500, 100, 30, "white");
-button2Rect.text = "Rules Engine";
+var button1Rect = new Rect(400, 500, 100, 30, "green");
+button1Rect.text = " Game";
+var button2Rect = new Rect(550, 500, 100, 30, "green");
+button2Rect.text = " Rules Engine";
 const degree = Math.PI / 180;
 
-var enterRoomCode = new Rect(150, 300, 130, 30, "white");
-enterRoomCode.text = "Enter Room Code";
+var enterRoomCode = new Rect(150, 300, 130, 30, "green");
+enterRoomCode.text = " Enter Room Code";
+
+ctx.strokeStyle = "white";
 
 const keypad = [];
 keypad.x = enterRoomCode.x, keypad.y = enterRoomCode.y + 50;
 
 for(i = 0; i < 10; i++){
-  var num = new Rect(keypad.x + (25 * i), keypad.y, 15, 20, "white");
+  var num = new Rect(keypad.x + (25 * i), keypad.y, 15, 22, "green");
   num.text = i;
   keypad.push(num);
 }
 
-var joinGameButton = new Rect(keypad.x + 70, keypad.y + 35, 80, 30, "white");
-joinGameButton.image = document.getElementById("game_button");
+var joinGameButton = new Rect(keypad.x + 70, keypad.y + 35, 80, 30, "green");
 joinGameButton.text = "Join Game";
 
-var newRoomEntry = new Rect(keypad.x, keypad.y + 35, 55, 25, "white");
-newRoomEntry.image = document.getElementById("rules_button");
+var newRoomEntry = new Rect(keypad.x, keypad.y + 35, 55, 25, "green");
 newRoomEntry.text = "Rules Engine";
 
 var openKeypad = false;
