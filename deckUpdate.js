@@ -160,12 +160,22 @@ class Deck {
     }
 }
 
+function updateDeckID(allDecks){
+    if(allDecks.currentID === undefined){
+        allDecks.currentID = 0;
+    } else {
+        allDecks.currentID++;
+    }
+}
+
 function addEmptyDeck(allDecks, x, y){
-    allDecks.push(new Deck(allDecks.length, x, y));
+    updateDeckID(allDecks);
+    allDecks.push(new Deck(allDecks.currentID, x, y));
 }
 
 function addFullDeck(allDecks, x, y){
-    var d = new Deck(allDecks.length, x, y);
+    updateDeckID(allDecks);
+    var d = new Deck(allDecks.currentID, x, y);
     d.createFullDeck();
     allDecks.push(d);
 }
@@ -212,17 +222,11 @@ function endDecks(allDecks){
 }
 
 function moveTopCard(x, y, i, allDecks){
+    if(allDecks[i].length == 1){
+        return i;
+    }
     addEmptyDeck(allDecks, x, y);
     allDecks[allDecks.length - 1].addToTop(allDecks[i].removeTopCard());
-    if(allDecks[i].length == 0){
-        for(let j = 0; j < allDecks.length; j++){
-            if(j != i){
-                allDecks.push(allDecks.shift());
-            } else {
-                allDecks.shift();
-            }
-        }
-    }
     return allDecks.length - 1;
 }
 

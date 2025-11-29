@@ -1,20 +1,22 @@
 class Deck{
-    constructor(topCard, numCards, visible, x, y, rotation) {
+    constructor(topCard, numCards, visible, x, y, rotation, id) {
         this.topCard = topCard;
         this.numCards = numCards;
         this.visible = visible;
         this.x = x;
         this.y = y;
         this.rotation = rotation;
+        this.id = id;
     }
 
-    updateDeck(topCard, numCards, visible, x, y, rotation){
+    updateDeck(topCard, numCards, visible, x, y, rotation, id){
         this.topCard = topCard;
         this.numCards = numCards;
         this.visible = visible;
         this.x = x;
         this.y = y;
         this.rotation = rotation;
+        this.id = id;
     }
 
     renderDeck(){
