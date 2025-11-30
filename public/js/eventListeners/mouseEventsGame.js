@@ -78,6 +78,12 @@ function mouseUpEventGame(e){
             var mouseX = e.clientX - frontendDecks[i].differenceX;
             var mouseY = e.clientY - frontendDecks[i].differenceY;
             socket.emit('mouseup', mouseX, mouseY, i);
+            for(const j in frontendDecks){
+                if(j != i && cardsCollide(frontendDecks[i], frontendDecks[j], img)){
+                    socket.emit('combineDecks', i, j);
+                    break;
+                }
+            }
         }
         if(frontendDecks[i].rotating){
             var mouseX = e.clientX - frontendDecks[i].startX;

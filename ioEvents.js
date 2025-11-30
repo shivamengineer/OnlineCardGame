@@ -33,4 +33,9 @@
     allDecks[i].y = y;
   }
 
+  function combineDecks(allDecks, i, j){
+    allDecks[j].addDeck(allDecks[i]);
+    allDecks.splice(i, 1);
+  }
+
   module.exports = {connectPlayer, keyDown, joinGame, moveDeck};

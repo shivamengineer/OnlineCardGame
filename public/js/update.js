@@ -30,6 +30,11 @@ function updateDecks(backendDecks){
       frontendDecks[i].updateDeck(backendDeck.topCard, backendDeck.length, backendDeck.visible, backendDeck.x, backendDeck.y, backendDeck.rotation, backendDeck.currentID);
     }
   }
+  for(const i in frontendDecks){
+    if(!backendDecks[i]){
+      frontendDecks.splice(i, 1);
+    }
+  }
 }
 
 function shiftPlayersLeft(temp){

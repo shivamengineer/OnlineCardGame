@@ -37,3 +37,14 @@ function mouseCollidesCard(mouseX, mouseY, card, img){
         }
     return collides;
 }
+
+function cardsCollide(card1, card2, img){
+    var collides = false;
+    if(card1.x - (img.naturalWidth / 2) < card2.x + (img.naturalWidth / 2) &&
+        card1.x + (img.naturalWidth / 2) > card2.x - (img.naturalWidth / 2) &&
+        card1.y - (img.naturalHeight / 2) < card2.y + (img.naturalHeight / 2) &&
+        card1.y + (img.naturalHeight / 2) > card2.y - (img.naturalHeight / 2)){
+        collides = true;
+    }
+    return collides;
+}

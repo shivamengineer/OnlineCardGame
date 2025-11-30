@@ -107,7 +107,6 @@ class Deck {
         return false;
     }
 
-
     flip() {
         this.deck.reverse();
         this.setTopCard();
@@ -121,10 +120,11 @@ class Deck {
     }
 
     addDeck(d) {
-        d.forEach(item =>{
-            this.deck[this.length] = item;
-            this.length++
-        });
+        while(d.deck.length > 0) {
+            this.deck.push(d.deck.shift());
+            this.length++;
+            d.length--;
+        }
         this.setTopCard();
     }
 
@@ -196,17 +196,9 @@ function removeDeck(allDecks, deckID){
     return removedDeck;
 }
 
-function combineDecks(allDecks, deckID1, deckID2){
-    allDecks[deckID1].addDeck(allDecks[deckID2]);
-    for(i = 0; i < allDecks.length; i++){
-        var temp = allDecks.shift();
-        if(temp.dID > deckID2){
-            temp.dID--;
-        }
-        if(i != deckID2){
-            allDecks.push(temp);
-        }
-    }
+function combineDecks(allDecks, i, j){
+    allDecks[j].addDeck(allDecks[i]);
+    allDecks.splice(i, 1);
 }
 
 function startDecks(allDecks){

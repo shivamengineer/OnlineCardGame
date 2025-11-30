@@ -75,6 +75,11 @@ io.on('connection', (socket) => {
     socket.emit('moveTopCardResponse', mouseX, mouseY, index);
   });
 
+  socket.on('combineDecks', (i, j) => {
+    deckA.combineDecks(decks, i, j);
+    io.emit('updatePlayers', players, decks);
+  });
+
   //socket.emit for local, io.emit for everyone
   io.emit('updatePlayers', players, decks);
 
