@@ -24,8 +24,15 @@ function drawAlways(){
 }
 
 function drawCards(){
+    var selected = -1;
     for(const i in frontendDecks){
         frontendDecks[i].renderDeck();
+        if(frontendDecks[i].moving || frontendDecks[i].rotating){
+            selected = i;
+        }
+    }
+    if(selected != -1){
+        frontendDecks[selected].renderDeck();
     }
 }
 
