@@ -40,10 +40,10 @@ function mouseCollidesCard(mouseX, mouseY, card, img){
 
 function cardsCollide(card1, card2, img){
     var collides = false;
-    if(card1.x - (img.naturalWidth / 2) < card2.x + (img.naturalWidth / 2) &&
-        card1.x + (img.naturalWidth / 2) > card2.x - (img.naturalWidth / 2) &&
-        card1.y - (img.naturalHeight / 2) < card2.y + (img.naturalHeight / 2) &&
-        card1.y + (img.naturalHeight / 2) > card2.y - (img.naturalHeight / 2)){
+    if(card1.x - (img.naturalWidth / 4) < card2.x + (img.naturalWidth / 4) &&
+        card1.x + (img.naturalWidth / 4) > card2.x - (img.naturalWidth / 4) &&
+        card1.y - (img.naturalHeight / 3) < card2.y + (img.naturalHeight / 3) &&
+        card1.y + (img.naturalHeight / 3) > card2.y - (img.naturalHeight / 3)){
         collides = true;
     }
     return collides;
