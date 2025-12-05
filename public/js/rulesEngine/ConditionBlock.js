@@ -1,0 +1,9 @@
+class ConditionBlock {
+    constructor(){
+
+    }
+
+    execute(){
+        
+    }
+}
