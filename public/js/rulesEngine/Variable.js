@@ -1,4 +1,4 @@
-class StatementBlock {
+class Variable {
     constructor(){
 
     }

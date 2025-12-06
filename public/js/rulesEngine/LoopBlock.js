@@ -1,8 +1,10 @@
 class LoopBlock extends StatementBlock {
-    constructor(condition, body){
+    constructor(){
         super();
-        this.condition = condition;
-        this.loopBody = body;
+         assert(Scanner.blocks[Scanner.index].type === "LoopBlock");
+        Scanner.index++;
+        this.condition = new ConditionBlock();
+        this.body = new Declaration();
     }
 
     execute(){
