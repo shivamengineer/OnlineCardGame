@@ -1,5 +1,0 @@
-class EndSetup {
-    constructor(){
-
-    }
-}

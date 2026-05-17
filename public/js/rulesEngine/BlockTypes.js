@@ -9,4 +9,20 @@ const BlockTypes = {
     DEAL: 'deal',
     SHUFFLE: 'shuffle',
     CUT: 'cut',
+
+    LESS_THAN = "<",
+    GREATER_THAN = ">",
+    EQUAL = "==",
+    LESS_THAN_EQUAL = "<=",
+    GREATER_THAN_EQUAL = ">=",
+    NOT_EQUAL = "!=",
+
+    VARIABLE = "variable",
+
+    AND = "and",
+    OR = "or",
+    XOR = "xor",
+    NOT = "not",
+    
+    END = "end",
 };
